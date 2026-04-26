@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-gold: #C9A84C;
+  --color-navy: #1A1A2E;
+  --color-cream: #FAF9F6;
+  --font-sans: var(--font-cairo, "Cairo", "Arial", sans-serif);
+  --font-serif: var(--font-cormorant, "Cormorant Garamond", "Georgia", serif);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+}
+
+/* ── 3D Orb rings ─────────────────────────────────────────────────────── */
+@keyframes ring-x {
+  from { transform: rotateX(0deg); }
+  to   { transform: rotateX(360deg); }
+}
+@keyframes ring-y {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+@keyframes ring-z {
+  from { transform: rotateZ(0deg); }
+  to   { transform: rotateZ(360deg); }
+}
+@keyframes ring-xy {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to   { transform: rotateX(360deg) rotateY(180deg); }
+}
+
+/* ── Floating particles ───────────────────────────────────────────────── */
+@keyframes float-up {
+  0%   { transform: translateY(0px) scale(1);   opacity: 0.15; }
+  50%  { transform: translateY(-30px) scale(1.2); opacity: 0.4; }
+  100% { transform: translateY(0px) scale(1);   opacity: 0.15; }
+}
+
+/* ── Gold shimmer sweep ───────────────────────────────────────────────── */
+@keyframes shimmer-sweep {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Slow drift for orbs ──────────────────────────────────────────────── */
+@keyframes orb-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 15px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ── Scroll indicator bounce ──────────────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+/* ── Glow pulse ───────────────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.2), 0 0 40px rgba(201,168,76,0.1); }
+  50%       { box-shadow: 0 0 40px rgba(201,168,76,0.4), 0 0 80px rgba(201,168,76,0.2); }
+}
+
+/* ── Text shimmer ─────────────────────────────────────────────────────── */
+@keyframes text-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Utility classes ──────────────────────────────────────────────────── */
+.animate-ring-x  { animation: ring-x  8s linear infinite; }
+.animate-ring-y  { animation: ring-y  11s linear infinite; }
+.animate-ring-z  { animation: ring-z  14s linear infinite reverse; }
+.animate-ring-xy { animation: ring-xy 16s linear infinite; }
+.animate-float   { animation: float-up 4s ease-in-out infinite; }
+.animate-orb     { animation: orb-drift 12s ease-in-out infinite; }
+.animate-scroll  { animation: scroll-bounce 1.8s ease-in-out infinite; }
+.animate-glow    { animation: glow-pulse 3s ease-in-out infinite; }
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #fff 0%, #C9A84C 30%, #fff 50%, #C9A84C 70%, #fff 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* 3D card tilt container */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
 }

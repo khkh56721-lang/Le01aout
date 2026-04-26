@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "products": "Produits",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_title": "Le luxe commence chez vous",
+    "hero_subtitle": "Décoration et mobilier de luxe au cœur de Nouakchott",
+    "hero_cta": "Voir les produits",
+    "whatsapp_cta": "Contacter via WhatsApp",
+    "featured_title": "Nos produits phares",
+    "categories_title": "Parcourir par catégorie"
+  },
+  "product": {
+    "request_whatsapp": "Commander via WhatsApp",
+    "inquire": "Demander le prix",
+    "made_to_order": "Fabriqué sur commande",
+    "in_stock": "En stock",
+    "out_of_stock": "Épuisé",
+    "back_to_products": "← Retour aux produits",
+    "description": "Description",
+    "specs": "Caractéristiques",
+    "colors": "Couleurs disponibles",
+    "materials": "Matériaux",
+    "dimensions": "Dimensions",
+    "category": "Catégorie",
+    "code": "Code produit",
+    "related": "Vous pourriez aimer",
+    "not_found": "Produit introuvable"
+  },
+  "categories": {
+    "salon": "Salon",
+    "chambre": "Chambre",
+    "salle_a_manger": "Salle à manger",
+    "cuisine": "Cuisine",
+    "luminaires": "Luminaires",
+    "accessoires": "Accessoires déco",
+    "all": "Tout"
+  },
+  "about": {
+    "title": "Notre histoire",
+    "intro": "Depuis plus de 5 ans, Le Premier Aout Decor habille les plus belles maisons de Nouakchott.",
+    "story_title": "L'héritage d'un savoir-faire",
+    "story_text": "Fondée sur une passion pour la décoration d'intérieur et l'artisanat de qualité, Le Premier Aout Decor est devenue une référence du mobilier haut de gamme en Mauritanie. Chaque pièce de notre catalogue — du salon Shiba à la chambre Prada — est sélectionnée pour son élégance, sa durabilité, et sa capacité à transformer un espace en véritable expérience.",
+    "values_title": "Nos valeurs",
+    "value1_title": "Qualité sans compromis",
+    "value1_text": "Des matériaux nobles, des finitions soignées, et une attention au détail dans chaque produit.",
+    "value2_title": "Service personnalisé",
+    "value2_text": "Conseils sur mesure, livraison à domicile, et accompagnement post-achat — par WhatsApp, à tout moment.",
+    "value3_title": "Fabrication sur commande",
+    "value3_text": "Certaines pièces peuvent être adaptées à vos dimensions et préférences — dites-le-nous.",
+    "cta_title": "Une idée de projet ?",
+    "cta_text": "Envoyez-nous un message WhatsApp — nous vous répondons dans la journée."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes à votre écoute — WhatsApp, téléphone, ou en boutique.",
+    "phone": "Téléphone",
+    "whatsapp": "WhatsApp",
+    "whatsapp_cta": "Ouvrir WhatsApp",
+    "address": "Adresse",
+    "address_value": "Route Sukuk, Nouakchott, Mauritanie",
+    "directions": "Voir sur Google Maps",
+    "hours": "Heures d'ouverture",
+    "hours_value": "Tous les jours · 9h00 — 21h00",
+    "social": "Nous suivre",
+    "email": "Email"
+  },
+  "footer": {
+    "tagline": "Le luxe dans chaque détail",
+    "copyright": "© 2026 Le Premier Aout Decor. Tous droits réservés."
+  }
+}
