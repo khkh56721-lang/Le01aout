@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Cairo, Cormorant_Garamond } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Cairo, Cormorant_Garamond, Manrope } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -12,6 +12,12 @@ const cairo = Cairo({
   display: "swap",
 });
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -21,9 +27,15 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://le01aout.com"),
   title: "Le Premier Aout Decor — نواكشوط",
   description:
     "ديكور وأثاث فاخر في نواكشوط، موريتانيا | Mobilier et décoration de luxe à Nouakchott",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 import Footer from "@/components/Footer";
@@ -44,9 +56,9 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${cairo.variable} ${cormorant.variable}`}
+      className={`${cairo.variable} ${cormorant.variable} ${manrope.variable}`}
     >
-      <body className="bg-[#FAF9F6] text-[#1A1A2E] font-sans antialiased flex flex-col min-h-screen">
+      <body className="bg-[#F5F1EA] text-[#2A2620] font-sans antialiased flex flex-col min-h-screen">
         <NextIntlClientProvider messages={messages}>
           <div className="flex-grow">
             {children}

@@ -11,6 +11,7 @@ See the root `../CLAUDE.md` for full project context, data pipeline, and archite
 ```bash
 npm run dev -- --webpack   # Turbopack causes file permission errors — always use --webpack
 node_modules/.bin/tsc --noEmit   # npx tsc installs wrong package
+npm run build              # Full production build — run before deploying
 ```
 
 ---
@@ -27,16 +28,53 @@ node_modules/.bin/tsc --noEmit   # npx tsc installs wrong package
 
 ---
 
-## Three.js / WebGL
+## Design System — Current Palette
 
-`LuxuryScene.tsx` uses `@react-three/fiber` + `@react-three/drei`. It **must** be loaded with:
+Warm earthy luxury aesthetic. **Do not revert to old dark navy palette.**
+
+| Token | Value | Usage |
+|---|---|---|
+| `#F5F1EA` | cream | page/section backgrounds |
+| `#E8E2D5` | taupe | card borders, secondary bg |
+| `#B8956A` | warm gold | all gold accents, CTAs, dividers |
+| `#2A2620` | charcoal | primary text, dark buttons |
+| `#6B6358` | warm grey | secondary text, labels |
+| `#1A1814` | near-black | footer, dark panels |
+
+Three fonts loaded in `app/[locale]/layout.tsx`:
+- `--font-cairo` — Arabic UI (Cairo)
+- `--font-cormorant` — luxury display serif (Cormorant Garamond weight 300 italic — all headings)
+- `--font-manrope` — body/UI sans-serif (Latin)
+
+`--font-sans` composes all three in priority order via `@theme {}` in `globals.css`.
+
+---
+
+## Homepage Sections
+
+`app/[locale]/page.tsx` renders: `HeroSection → AnimatedCategories → EditorialRows → FeaturedProductsSection → VisitShowroom CTA → WhatsAppButton`
+
+**HeroSection** — full-bleed video (`/public/hero-video.mp4`) with cream gradient vignettes. Content anchored bottom-left (bottom-right for RTL Arabic). No Three.js — `LuxuryScene.tsx` exists in `components/` but is unused; do not re-import it into HeroSection.
+
+**AnimatedCategories** — 5 category cards, cream section bg, taupe card gradients. Links to `/products?category={id}`.
+
+**EditorialRows** — two alternating full-width image+text rows, cream bg. Second row (`chambre`) uses `/public/homepage.png`. First row (`salon`) still shows gradient placeholder until a photo is added via `row.imageUrl`.
+
+**FeaturedProductsSection** — horizontal snap carousel (`overflow-x-auto snap-x`), `useRef` + `scrollBy` for prev/next arrows. Each `ProductCard` is `snap-start flex-none w-72 sm:w-80`.
+
+**ProductCard** — white card, taupe image bg, no 3D tilt. Hover: `translateY(-3px)` + shadow.
+
+---
+
+## i18n Pattern
+
+Components hardcode trilingual strings inline — do not add component strings to `messages/*.json`. Only page-level strings go in `messages/`.
 
 ```ts
-const LuxuryScene = dynamic(() => import("./LuxuryScene"), { ssr: false });
-// then: <Suspense fallback={...}><LuxuryScene /></Suspense>
+const label = locale === "ar" ? "النص" : locale === "fr" ? "Texte" : "Text";
 ```
 
-Never import it directly — Three.js breaks SSR.
+RTL: phone numbers and other LTR strings inside RTL pages need `dir="ltr" className="inline-block"` to prevent digit reversal.
 
 ---
 
@@ -53,16 +91,6 @@ const v: Variants = {
 
 ---
 
-## i18n Pattern (no i18n JSON for components)
+## Turbopack Root
 
-Components hardcode trilingual strings inline — do not add component strings to `messages/*.json`. Only page-level strings (hero title, meta, etc.) go in `messages/`.
-
-```ts
-const label = locale === "ar" ? "النص" : locale === "fr" ? "Texte" : "Text";
-```
-
----
-
-## Image Placeholders
-
-All `product.images` arrays are currently empty (Cloudinary sync pending). Components use dark gradient fallbacks — they upgrade automatically once `sync_photos.py` + `airtable_to_json.py` run. Do not add hardcoded placeholder images.
+`next.config.ts` sets `turbopack: { root: path.join(__dirname, "..") }` — points to `Le01Aout/` parent so that `website/data/` (symlink to `../data/`) resolves correctly. Do not change this to `__dirname` or products JSON imports will break.

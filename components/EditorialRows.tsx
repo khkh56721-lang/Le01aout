@@ -24,7 +24,8 @@ interface EditorialRow {
 const ROWS: EditorialRow[] = [
   {
     id: "salon",
-    gradient: "from-[#1a1208] via-[#2a1c08] to-[#0D0D1A]",
+    imageUrl: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892883/le01aout/showroom/b6_dsc0867.jpg",
+    gradient: "from-[#1a1208] via-[#2a1c08] to-[#F5F1EA]",
     eyebrow_ar: "صالونات فاخرة",
     eyebrow_fr: "Salons de Prestige",
     eyebrow_en: "Prestige Living",
@@ -38,7 +39,8 @@ const ROWS: EditorialRow[] = [
   },
   {
     id: "chambre",
-    gradient: "from-[#0a0a12] via-[#12102a] to-[#0D0D1A]",
+    imageUrl: "/homepage.png",
+    gradient: "from-[#0a0a12] via-[#12102a] to-[#F5F1EA]",
     eyebrow_ar: "غرف النوم",
     eyebrow_fr: "Chambres",
     eyebrow_en: "Bedrooms",
@@ -74,20 +76,20 @@ export default function EditorialRows() {
   };
 
   return (
-    <div className="bg-[#0D0D1A]">
+    <div className="bg-[#F5F1EA]">
       {/* ── Section header — Boca do Lobo style ──────────────────────── */}
       <motion.div
-        className="text-center py-20 px-6 border-t border-[#C9A84C]/10"
+        className="text-center py-16 sm:py-20 px-6 border-t border-[#B8956A]/10"
         variants={fadeIn}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <p className="text-[9px] tracking-[0.5em] uppercase font-mono text-[#C9A84C] mb-4">
+        <p className="text-[9px] tracking-[0.5em] uppercase font-mono text-[#B8956A] mb-4">
           {isAr ? "مجموعاتنا المميزة" : locale === "fr" ? "Nos Collections Exclusives" : "Exclusive Collections"}
         </p>
         <h2
-          className="text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.0] tracking-tight"
+          className="text-4xl sm:text-6xl lg:text-7xl text-[#2A2620] leading-[1.0] tracking-tight"
           style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
         >
           {isAr ? "اختيار استثنائي" : locale === "fr" ? "Un choix d'exception" : "An Exceptional Selection"}
@@ -101,14 +103,14 @@ export default function EditorialRows() {
         return (
           <div
             key={row.id}
-            className="relative flex flex-col lg:flex-row min-h-[85vh] border-t border-white/5"
+            className="relative flex flex-col lg:flex-row lg:min-h-[85svh] border-t border-white/5"
           >
             {/* ── Image panel ────────────────────────────────────────── */}
             <motion.div
-              className={`relative w-full lg:w-[58%] overflow-hidden ${
+              className={`relative w-full h-[62vw] sm:h-[48vw] lg:h-auto lg:w-[58%] overflow-hidden ${
                 isEven ? "lg:order-1" : "lg:order-2"
               }`}
-              style={{ minHeight: "55vw", maxHeight: "85vh" }}
+              style={{ maxHeight: "85svh" }}
               variants={imgVariant}
               initial="hidden"
               whileInView="visible"
@@ -121,6 +123,7 @@ export default function EditorialRows() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 58vw"
+                  quality={90}
                 />
               ) : (
                 /* Dark luxury gradient placeholder */
@@ -128,14 +131,14 @@ export default function EditorialRows() {
                   {/* Subtle gold geometry inside the image area */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-48 h-48 opacity-[0.07]">
-                      <div className="absolute inset-0 border border-[#C9A84C] rotate-45 animate-[ring-xy_25s_linear_infinite]" />
-                      <div className="absolute inset-6 border border-[#C9A84C] rotate-12 animate-[ring-z_18s_linear_infinite]" />
-                      <div className="absolute inset-12 border border-[#C9A84C] animate-[ring-x_20s_linear_infinite]" />
+                      <div className="absolute inset-0 border border-[#B8956A] rotate-45 animate-[ring-xy_25s_linear_infinite]" />
+                      <div className="absolute inset-6 border border-[#B8956A] rotate-12 animate-[ring-z_18s_linear_infinite]" />
+                      <div className="absolute inset-12 border border-[#B8956A] animate-[ring-x_20s_linear_infinite]" />
                     </div>
                   </div>
                   {/* Text hint that photo goes here */}
                   <div className="absolute bottom-6 left-6 right-6">
-                    <p className="text-[8px] tracking-[0.4em] uppercase font-mono text-[#C9A84C]/30">
+                    <p className="text-[8px] tracking-[0.4em] uppercase font-mono text-[#B8956A]/30">
                       {isAr ? "الصورة قريباً" : "Photo coming soon"}
                     </p>
                   </div>
@@ -143,12 +146,12 @@ export default function EditorialRows() {
               )}
 
               {/* Bottom-up vignette — Boca do Lobo technique */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </motion.div>
 
             {/* ── Text panel ─────────────────────────────────────────── */}
             <motion.div
-              className={`relative w-full lg:w-[42%] flex flex-col justify-center px-8 sm:px-14 lg:px-16 xl:px-20 py-16 lg:py-0 bg-[#0D0D1A] ${
+              className={`relative w-full lg:w-[42%] flex flex-col justify-center px-6 sm:px-14 lg:px-16 xl:px-20 py-14 sm:py-16 lg:py-0 bg-[#F5F1EA] ${
                 isEven ? "lg:order-2" : "lg:order-1"
               }`}
               variants={fadeIn}
@@ -157,13 +160,13 @@ export default function EditorialRows() {
               viewport={{ once: true, margin: "-100px" }}
             >
               {/* Eyebrow — ultra-small caps mono */}
-              <p className="text-[9px] tracking-[0.5em] uppercase font-mono text-[#C9A84C] mb-8">
+              <p className="text-[9px] tracking-[0.5em] uppercase font-mono text-[#B8956A] mb-8">
                 {pick(row, "eyebrow")}
               </p>
 
               {/* ── SERIF headline — Cormorant Garamond signature ── */}
               <h2
-                className="text-5xl sm:text-6xl lg:text-[clamp(3rem,4.5vw,5rem)] text-white leading-[1.02] mb-8 whitespace-pre-line"
+                className="text-[2.75rem] sm:text-6xl lg:text-[clamp(3rem,4.5vw,5rem)] text-[#2A2620] leading-[1.02] mb-8 whitespace-pre-line"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 300,
@@ -175,17 +178,17 @@ export default function EditorialRows() {
               </h2>
 
               {/* Thin gold rule — Boca do Lobo signature divider */}
-              <div className="w-10 h-px bg-[#C9A84C] mb-8" />
+              <div className="w-10 h-px bg-[#B8956A] mb-8" />
 
               {/* Body text */}
-              <p className="text-sm sm:text-base text-gray-400 leading-[1.8] max-w-[360px] mb-12 font-light">
+              <p className="text-sm sm:text-base text-[#6B6358] leading-[1.8] max-w-[360px] mb-12 font-light">
                 {pick(row, "sub")}
               </p>
 
               {/* ── Text-link CTA — Boca do Lobo style (no pill button) ── */}
               <Link
                 href={row.href}
-                className="group self-start flex items-center gap-3 text-[11px] tracking-[0.45em] uppercase font-mono text-white hover:text-[#C9A84C] transition-colors duration-300"
+                className="group self-start flex items-center gap-3 text-[11px] tracking-[0.45em] uppercase font-mono text-[#2A2620] hover:text-[#B8956A] transition-colors duration-300"
               >
                 <span className="w-8 h-px bg-current transition-all duration-500 group-hover:w-16" />
                 {isAr ? "اكتشف المجموعة" : locale === "fr" ? "Découvrir" : "Discover"}

@@ -1,17 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #C9A84C;
-  --color-navy: #1A1A2E;
-  --color-cream: #FAF9F6;
-  --font-sans: var(--font-cairo, "Cairo", "Arial", sans-serif);
+  --color-gold: #B8956A;
+  --color-navy: #1A1814;
+  --color-cream: #F5F1EA;
+  --color-taupe: #E8E2D5;
+  --color-text: #2A2620;
+  --color-text-sec: #6B6358;
+  --font-sans: var(--font-manrope, var(--font-cairo, "Manrope", "Cairo", "Arial", sans-serif));
   --font-serif: var(--font-cormorant, "Cormorant Garamond", "Georgia", serif);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-cream);
-  color: var(--color-navy);
+  color: var(--color-text);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Kill the grey tap flash on mobile, smooth out touch */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ── 3D Orb rings ─────────────────────────────────────────────────────── */
@@ -61,8 +85,8 @@ body {
 
 /* ── Glow pulse ───────────────────────────────────────────────────────── */
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.2), 0 0 40px rgba(201,168,76,0.1); }
-  50%       { box-shadow: 0 0 40px rgba(201,168,76,0.4), 0 0 80px rgba(201,168,76,0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(184,149,106,0.2), 0 0 40px rgba(184,149,106,0.1); }
+  50%       { box-shadow: 0 0 40px rgba(184,149,106,0.4), 0 0 80px rgba(184,149,106,0.2); }
 }
 
 /* ── Text shimmer ─────────────────────────────────────────────────────── */
@@ -85,7 +109,7 @@ body {
 .text-shimmer {
   background: linear-gradient(
     90deg,
-    #fff 0%, #C9A84C 30%, #fff 50%, #C9A84C 70%, #fff 100%
+    #fff 0%, #B8956A 30%, #fff 50%, #B8956A 70%, #fff 100%
   );
   background-size: 200% auto;
   background-clip: text;
@@ -99,3 +123,11 @@ body {
   transform-style: preserve-3d;
   transition: transform 0.1s ease-out;
 }
+
+/* ── WhatsApp floating-button pulse ───────────────────────────────────── */
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  70%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.animate-wa-pulse { animation: wa-pulse 2.6s cubic-bezier(0.22,1,0.36,1) infinite; }

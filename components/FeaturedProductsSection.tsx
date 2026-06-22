@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { useRef } from "react";
 import ProductCard from "./ProductCard";
 
 interface Product {
@@ -17,23 +18,6 @@ interface Product {
   in_stock: boolean;
 }
 
-const EASE_SPRING = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
-  },
-};
-
-const cardVariant: Variants = {
-  hidden:  { opacity: 0, y: 40, scale: 0.96 },
-  visible: {
-    opacity: 1, y: 0, scale: 1,
-    transition: { duration: 0.6, ease: EASE_SPRING },
-  },
-};
-
 const headingVariant: Variants = {
   hidden:  { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
@@ -41,6 +25,7 @@ const headingVariant: Variants = {
 
 export default function FeaturedProductsSection({ products }: { products: Product[] }) {
   const locale = useLocale();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const sectionTitle =
     locale === "ar" ? "منتجاتنا المميزة" :
@@ -57,66 +42,92 @@ export default function FeaturedProductsSection({ products }: { products: Produc
     locale === "fr" ? "Sélection du moment" :
     "Featured Collection";
 
+  const scrollBy = (dir: 1 | -1) => {
+    scrollRef.current?.scrollBy({ left: dir * 340, behavior: "smooth" });
+  };
+
   if (!products.length) return null;
 
   return (
-    <section className="bg-[#0D0D1A] border-t border-white/5 px-6 py-20">
-    <div className="container mx-auto">
-      {/* Heading */}
-      <motion.div
-        className="text-center mb-14"
-        variants={headingVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-      >
-        <p className="text-[#C9A84C] text-xs tracking-[0.3em] uppercase font-semibold mb-3">
-          {featuredLabel}
-        </p>
-        <h2
-          className="text-5xl sm:text-6xl text-white leading-tight"
-          style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
-        >{sectionTitle}</h2>
-        <div className="flex items-center justify-center gap-4 mt-4">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C9A84C]/60" />
-          <span className="text-[#C9A84C]/60 text-sm">✦</span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C9A84C]/60" />
-        </div>
-      </motion.div>
-
-      {/* Cards grid */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-        variants={container}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
-        {products.map((product) => (
-          <motion.div key={product.id} variants={cardVariant}>
-            <ProductCard product={product} />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Boca do Lobo text-link CTA */}
-      <motion.div
-        className="text-center mt-16"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" as const }}
-      >
-        <Link
-          href="/products"
-          className="group inline-flex items-center gap-4 text-[11px] tracking-[0.5em] uppercase font-mono text-white hover:text-[#C9A84C] transition-colors duration-300"
+    <section className="bg-[#F5F1EA] py-16 sm:py-20">
+      <div className="container mx-auto px-6">
+        {/* Heading row with scroll arrows */}
+        <motion.div
+          className="flex items-end justify-between mb-8 sm:mb-10"
+          variants={headingVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
         >
-          <span className="w-10 h-px bg-current transition-all duration-500 group-hover:w-20" />
-          {viewAll}
-          <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
-        </Link>
-      </motion.div>
-    </div>
+          <div>
+            <p className="text-[#B8956A] text-xs tracking-[0.3em] uppercase font-semibold mb-2">
+              {featuredLabel}
+            </p>
+            <h2
+              className="text-4xl sm:text-5xl text-[#2A2620] leading-tight"
+              style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
+            >
+              {sectionTitle}
+            </h2>
+          </div>
+
+          {/* Arrow controls */}
+          <div className="hidden sm:flex items-center gap-2 pb-1">
+            <button
+              onClick={() => scrollBy(-1)}
+              className="w-9 h-9 rounded-full border border-[#B8956A]/50 text-[#B8956A] flex items-center justify-center hover:bg-[#B8956A] hover:text-white transition-all duration-200"
+              aria-label="Scroll left"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              className="w-9 h-9 rounded-full border border-[#B8956A]/50 text-[#B8956A] flex items-center justify-center hover:bg-[#B8956A] hover:text-white transition-all duration-200"
+              aria-label="Scroll right"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Horizontal scroll carousel */}
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="snap-start flex-none w-72 sm:w-80"
+            >
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+
+        {/* View all CTA */}
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" as const }}
+        >
+          <Link
+            href="/products"
+            className="group inline-flex items-center gap-4 text-[11px] tracking-[0.5em] uppercase font-mono text-[#2A2620] hover:text-[#B8956A] transition-colors duration-300"
+          >
+            <span className="w-10 h-px bg-current transition-all duration-500 group-hover:w-20" />
+            {viewAll}
+            <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 }

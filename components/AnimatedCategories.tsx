@@ -23,40 +23,45 @@ const CATEGORIES: CategoryDef[] = [
     label_ar: "صالون",
     label_fr: "Salon",
     label_en: "Living Room",
-    gradient: "from-[#1a1208] via-[#2a1f0a] to-[#0D0D1A]",
+    gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8C0B0]",
     mark: "⬡",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892916/le01aout/showroom/b6_dsc0889.jpg",
   },
   {
     id: "chambre",
     label_ar: "غرفة نوم",
     label_fr: "Chambre",
     label_en: "Bedroom",
-    gradient: "from-[#0d0d1a] via-[#13102a] to-[#0a0a12]",
+    gradient: "from-[#E8E2D5] via-[#D0C9BB] to-[#C8C0B0]",
     mark: "◈",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892949/le01aout/showroom/b6_dsc0913.jpg",
   },
   {
     id: "salle_a_manger",
     label_ar: "غرفة طعام",
     label_fr: "Salle à manger",
     label_en: "Dining Room",
-    gradient: "from-[#12100a] via-[#1e1a08] to-[#0D0D1A]",
+    gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8BFB0]",
     mark: "◇",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781893019/le01aout/showroom/b6_dsc0971.jpg",
   },
   {
     id: "luminaires",
     label_ar: "إضاءة",
     label_fr: "Luminaires",
     label_en: "Lighting",
-    gradient: "from-[#1a1508] via-[#0D0D1A] to-[#0a0a0a]",
+    gradient: "from-[#E8E2D5] via-[#D8D1C5] to-[#CCc4B8]",
     mark: "✦",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892919/le01aout/showroom/b6_dsc0890.jpg",
   },
   {
     id: "accessoires",
     label_ar: "إكسسوارات",
     label_fr: "Accessoires",
     label_en: "Accessories",
-    gradient: "from-[#0a120a] via-[#0D0D1A] to-[#0a0a12]",
+    gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8C0B0]",
     mark: "⬟",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892927/le01aout/showroom/b6_dsc0896.jpg",
   },
 ];
 
@@ -85,21 +90,21 @@ export default function AnimatedCategories() {
     locale === "ar" ? c.label_ar : locale === "fr" ? c.label_fr : c.label_en;
 
   return (
-    <section className="bg-[#0D0D1A] py-20 border-t border-[#C9A84C]/10">
+    <section className="bg-[#F5F1EA] py-16 sm:py-20 border-t border-[#B8956A]/10">
       <div className="container mx-auto px-6">
 
         {/* Bugatti-style section eyebrow */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-10 sm:mb-12"
           variants={heading}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
         >
-          <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#C9A84C] mb-3">
+          <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#B8956A] mb-3">
             {locale === "ar" ? "تصفح حسب الفئة" : locale === "fr" ? "Explorer par catégorie" : "Browse by Category"}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-[#2A2620] leading-tight">
             {locale === "ar" ? "مجموعاتنا" : locale === "fr" ? "Nos Collections" : "Our Collections"}
           </h2>
         </motion.div>
@@ -116,7 +121,7 @@ export default function AnimatedCategories() {
             <motion.div key={cat.id} variants={card}>
               <Link
                 href={`/products?category=${cat.id}`}
-                className="group relative flex flex-col justify-end overflow-hidden rounded-none border border-[#C9A84C]/15 hover:border-[#C9A84C]/60 transition-all duration-500"
+                className="group relative flex flex-col justify-end overflow-hidden rounded-none border border-[#B8956A]/15 hover:border-[#B8956A]/60 transition-all duration-500"
                 style={{ aspectRatio: "3/4" }}
               >
                 {/* Background — photo or gradient */}
@@ -127,6 +132,7 @@ export default function AnimatedCategories() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    quality={90}
                   />
                 ) : (
                   <div className={`absolute inset-0 bg-gradient-to-b ${cat.gradient}`} />
@@ -134,7 +140,7 @@ export default function AnimatedCategories() {
 
                 {/* Large decorative mark — fades on hover */}
                 <span
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5rem] text-[#C9A84C]/10 group-hover:text-[#C9A84C]/20 transition-colors duration-500 select-none pointer-events-none"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5rem] text-[#B8956A]/15 group-hover:text-[#B8956A]/30 transition-colors duration-500 select-none pointer-events-none"
                   aria-hidden="true"
                 >
                   {cat.mark}
@@ -145,14 +151,14 @@ export default function AnimatedCategories() {
 
                 {/* Label block */}
                 <div className="relative z-10 p-4 group-hover:pb-6 transition-all duration-300">
-                  <p className="text-[9px] tracking-[0.4em] uppercase font-mono text-[#C9A84C]/70 mb-1">
+                  <p className="text-[9px] tracking-[0.4em] uppercase font-mono text-[#B8956A]/80 mb-1">
                     {cat.id.replace("_", " ")}
                   </p>
                   <p className="text-sm sm:text-base font-black uppercase tracking-wide text-white leading-tight">
                     {label(cat)}
                   </p>
-                  {/* Bugatti-style pill CTA — slides up on hover */}
-                  <span className="inline-block mt-2 text-[9px] tracking-[0.3em] uppercase font-mono text-[#C9A84C] border border-[#C9A84C]/40 rounded-full px-3 py-1 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0">
+                  {/* Pill CTA — always visible on touch, slides up on hover (desktop) */}
+                  <span className="inline-block mt-2 text-[9px] tracking-[0.3em] uppercase font-mono text-[#B8956A] border border-[#B8956A]/40 rounded-full px-3 py-1 transition-all duration-300 opacity-100 translate-y-0 sm:opacity-0 sm:-translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
                     {locale === "ar" ? "اكتشف" : locale === "fr" ? "Explorer" : "Explore"}
                   </span>
                 </div>

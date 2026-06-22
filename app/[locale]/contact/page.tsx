@@ -8,12 +8,10 @@ export default async function ContactPage() {
   const PHONE = "+222 33 32 22 32";
   const PHONE_RAW = "22233322232";
   const EMAIL = "contact@le01aout.com";
-  const MAPS_SEARCH = "Le+Premier+Aout+Decor+Nouakchott";
-
   const waMessage = "مرحبا، أريد الاستفسار";
   const waUrl = `https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(waMessage)}`;
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${MAPS_SEARCH}`;
-  const mapsEmbed = `https://www.google.com/maps?q=${MAPS_SEARCH}&output=embed`;
+  const mapsUrl = `https://www.google.com/maps/place/Le+01+aout/@18.1256621,-15.9658079,17z`;
+  const mapsEmbed = `https://www.google.com/maps?q=18.1256621,-15.9658079&z=17&output=embed`;
 
   const cards = [
     {
@@ -58,14 +56,17 @@ export default async function ContactPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#1A1A2E] to-[#2d2d50] text-white py-20">
+      <section className="bg-[#F5F1EA] border-b border-[#B8956A]/20 py-20">
         <div className="container mx-auto px-6 text-center max-w-2xl">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[#C9A84C] font-bold mb-4">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[#B8956A] font-mono mb-4">
             Nouakchott · Mauritania
           </p>
-          <div className="w-16 h-0.5 bg-[#C9A84C] mx-auto mb-6" />
-          <h1 className="text-4xl md:text-5xl font-black mb-4">{t("title")}</h1>
-          <p className="text-lg text-white/80">{t("subtitle")}</p>
+          <div className="w-16 h-0.5 bg-[#B8956A] mx-auto mb-6" />
+          <h1
+            className="text-4xl md:text-5xl text-[#2A2620] mb-4"
+            style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
+          >{t("title")}</h1>
+          <p className="text-lg text-[#6B6358]">{t("subtitle")}</p>
         </div>
       </section>
 
@@ -78,15 +79,15 @@ export default async function ContactPage() {
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border ${
+              className={`rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border ${
                 c.highlight
-                  ? "bg-[#C9A84C] text-[#1A1A2E] border-[#C9A84C]"
-                  : "bg-white text-[#1A1A2E] border-gray-100"
+                  ? "bg-[#2A2620] text-white border-[#2A2620]"
+                  : "bg-white text-[#2A2620] border-[#E8E2D5]"
               }`}
             >
               <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
-                  c.highlight ? "bg-[#1A1A2E] text-[#C9A84C]" : "bg-[#1A1A2E]/5 text-[#1A1A2E]"
+                  c.highlight ? "bg-[#B8956A] text-white" : "bg-[#F5F1EA] text-[#B8956A]"
                 }`}
               >
                 {c.icon}
@@ -105,46 +106,46 @@ export default async function ContactPage() {
         <div className="grid lg:grid-cols-5 gap-8 items-stretch">
           {/* Info column */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
+            <div className="bg-white rounded-2xl p-7 border border-[#E8E2D5] shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#B8956A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-gray-500">
+                <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-[#6B6358]">
                   {t("address")}
                 </h3>
               </div>
-              <p className="text-lg font-bold text-[#1A1A2E] mb-4">
+              <p className="text-lg font-bold text-[#2A2620] mb-4">
                 {t("address_value")}
               </p>
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-[#C9A84C] hover:text-[#1A1A2E] transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-semibold text-[#B8956A] hover:text-[#2A2620] transition-colors"
               >
                 {t("directions")} →
               </a>
             </div>
 
-            <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
+            <div className="bg-white rounded-2xl p-7 border border-[#E8E2D5] shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#B8956A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
-                <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-gray-500">
+                <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-[#6B6358]">
                   {t("hours")}
                 </h3>
               </div>
-              <p className="text-lg font-bold text-[#1A1A2E]">
+              <p className="text-lg font-bold text-[#2A2620]">
                 {t("hours_value")}
               </p>
             </div>
 
-            <div className="bg-[#1A1A2E] rounded-2xl p-7 text-white shadow-sm">
-              <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-[#C9A84C] mb-3">
+            <div className="bg-[#1A1814] rounded-2xl p-7 text-white shadow-sm">
+              <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-[#B8956A] mb-3">
                 {t("social")}
               </h3>
               <div className="flex gap-3">
@@ -152,7 +153,7 @@ export default async function ContactPage() {
                   href="https://instagram.com/le01_aout"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 text-center bg-white/10 hover:bg-[#C9A84C] hover:text-[#1A1A2E] py-3 rounded-xl text-sm font-bold transition-all"
+                  className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"
                 >
                   Instagram
                 </a>
@@ -160,16 +161,24 @@ export default async function ContactPage() {
                   href="https://tiktok.com/@le_01_aout_deco"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 text-center bg-white/10 hover:bg-[#C9A84C] hover:text-[#1A1A2E] py-3 rounded-xl text-sm font-bold transition-all"
+                  className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"
                 >
                   TikTok
+                </a>
+                <a
+                  href="https://snapchat.com/add/le01_aoutdeco"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"
+                >
+                  Snapchat
                 </a>
               </div>
             </div>
           </div>
 
           {/* Map */}
-          <div className="lg:col-span-3 rounded-2xl overflow-hidden border border-gray-100 shadow-sm min-h-[400px]">
+          <div className="lg:col-span-3 rounded-2xl overflow-hidden border border-[#E8E2D5] shadow-sm min-h-[400px]">
             <iframe
               src={mapsEmbed}
               width="100%"
