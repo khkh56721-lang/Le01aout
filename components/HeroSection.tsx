@@ -81,7 +81,7 @@ export default function HeroSection() {
             <video
               ref={videoRef}
               className="absolute inset-0 w-full h-full object-cover object-center"
-              src="/hero-video.mp4"
+              src="https://res.cloudinary.com/ddjmrcbdw/video/upload/q_auto/le01aout/hero-video-4k.mp4"
               poster="https://res.cloudinary.com/ddjmrcbdw/image/upload/v1782232787/le01aout/hero_staircase.jpg"
               muted
               playsInline
