@@ -17,6 +17,16 @@
 /.next/
 /out/
 
+# cloudflare / opennext build output
+/.open-next/
+/.wrangler/
+
+# raw/oversized source assets (not deployed — exceed CF Workers 25 MiB asset limit)
+/.raw-video/
+
+# misplaced skill scratch
+/build-premium-website/
+
 # production
 /build
 

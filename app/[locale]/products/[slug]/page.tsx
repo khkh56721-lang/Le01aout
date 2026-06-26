@@ -1,10 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import Navbar from "@/components/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ProductCard from "@/components/ProductCard";
+import ProductGallery from "@/components/ProductGallery";
+import ProductReviews from "@/components/ProductReviews";
+import { getProductContent } from "@/lib/productContent";
 import products from "../../../../../data/products.json";
 
 interface PageProps {
@@ -32,15 +34,30 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const product = products.find((p) => p.id === slug);
   if (!product) notFound();
 
+  const content = getProductContent(slug);
+
   const name = locale === "ar" ? product.name_ar : product.name_fr;
-  const description =
-    locale === "ar"
-      ? product.description_ar
-      : product.description_fr;
+
+  // Prefer the richer long description from the content layer; fall back to the short catalog one.
+  const longDesc = content?.description_long;
+  const localizedLong = longDesc
+    ? locale === "ar"
+      ? longDesc.ar
+      : locale === "fr"
+        ? longDesc.fr
+        : longDesc.en
+    : "";
+  const shortDesc = locale === "ar" ? product.description_ar : product.description_fr;
+  const description = localizedLong || shortDesc;
 
   const code = product.id.toUpperCase().replace(/-/g, "_");
-  const image = product.images?.[0];
   const icon = CATEGORY_ICONS[product.subcategory ?? ""] ?? "🏠";
+
+  // Multi-item gallery: dedicated gallery_images if curated, else the main product images.
+  const galleryImages =
+    content?.gallery_images && content.gallery_images.length > 0
+      ? content.gallery_images
+      : (product.images ?? []);
 
   const related = products
     .filter((p) => p.category === product.category && p.id !== product.id)
@@ -62,25 +79,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Image */}
-          <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-100 shadow-sm">
-            {image ? (
-              <Image
-                src={image}
-                alt={name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={90}
-                priority
-                className="object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                <span className="text-8xl opacity-30">{icon}</span>
-                <span className="text-sm text-gray-300 font-mono tracking-widest">{code}</span>
-              </div>
-            )}
-          </div>
+          {/* Gallery — scroll through the items that make up this product */}
+          <ProductGallery images={galleryImages} name={name} icon={icon} code={code} />
 
           {/* Info */}
           <div className="flex flex-col">
@@ -90,23 +90,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <h1 className="text-3xl lg:text-4xl font-black text-[#1A1A2E] mb-2 leading-tight">
               {name}
             </h1>
-            <p className="text-xs text-gray-400 font-mono mb-6">
+            <p className="text-xs text-gray-400 font-mono mb-6 pb-6 border-b border-gray-100">
               {t("product.code")}: {code}
             </p>
-
-            {/* Price */}
-            {product.price_mru ? (
-              <div className="flex items-baseline gap-2 mb-8 pb-8 border-b border-gray-100">
-                <span className="text-5xl font-black text-[#C9A84C]">
-                  {product.price_mru.toLocaleString()}
-                </span>
-                <span className="text-base text-gray-400 font-medium">MRU</span>
-              </div>
-            ) : (
-              <p className="text-lg text-gray-400 italic mb-8 pb-8 border-b border-gray-100">
-                {t("product.inquire")}
-              </p>
-            )}
 
             {/* Badges */}
             <div className="flex flex-wrap gap-2 mb-6">
@@ -183,6 +169,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </a>
           </div>
         </div>
+
+        {/* Social proof — purchase count + customer reviews */}
+        {content && (
+          <ProductReviews
+            reviews={content.reviews}
+            purchaseCount={content.purchase_count}
+            rating={content.rating}
+          />
+        )}
 
         {/* Related products */}
         {related.length > 0 && (

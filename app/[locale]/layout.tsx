@@ -40,6 +40,31 @@ export const viewport: Viewport = {
 
 import Footer from "@/components/Footer";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FurnitureStore",
+  "@id": "https://le01aout.com/#business",
+  name: "Le Premier Aout Decor",
+  description:
+    "Showroom de meubles et décoration de luxe à Nouakchott. Salons, chambres, salle à manger — pièces uniques sur commande.",
+  url: "https://le01aout.com",
+  logo: "https://le01aout.com/logo-google.png",
+  image: "https://le01aout.com/logo-google.png",
+  telephone: "+22233322232",
+  email: "contact@le01aout.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "طريق صكوك",
+    addressLocality: "Nouakchott",
+    addressCountry: "MR",
+  },
+  sameAs: [
+    "https://www.instagram.com/le01_aout",
+    "https://www.tiktok.com/@le_01_aout_deco",
+    "https://www.facebook.com/profile.php?id=61578655620948",
+  ],
+};
+
 export default async function LocaleLayout({
   children,
   params,
@@ -59,6 +84,10 @@ export default async function LocaleLayout({
       className={`${cairo.variable} ${cormorant.variable} ${manrope.variable}`}
     >
       <body className="bg-[#F5F1EA] text-[#2A2620] font-sans antialiased flex flex-col min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <NextIntlClientProvider messages={messages}>
           <div className="flex-grow">
             {children}

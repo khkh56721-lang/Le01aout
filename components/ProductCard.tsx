@@ -79,17 +79,6 @@ export default function ProductCard({ product }: { product: Product }) {
           </h3>
         </Link>
 
-        {product.price_mru ? (
-          <div className="flex items-baseline gap-1 mb-4">
-            <span className="text-2xl font-black text-[#B8956A]">
-              {product.price_mru.toLocaleString()}
-            </span>
-            <span className="text-xs text-[#6B6358] font-medium">MRU</span>
-          </div>
-        ) : (
-          <p className="text-sm text-[#6B6358] mb-4 italic">{t("inquire")}</p>
-        )}
-
         {/* Text-link CTA with animated gold line */}
         <Link
           href={`/products/${product.id}`}
