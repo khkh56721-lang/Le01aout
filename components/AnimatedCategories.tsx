@@ -25,7 +25,7 @@ const CATEGORIES: CategoryDef[] = [
     label_en: "Living Room",
     gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8C0B0]",
     mark: "⬡",
-    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892916/le01aout/showroom/b6_dsc0889.jpg",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_fill,ar_3:4,g_auto,e_improve,w_900/v1782581679/le01aout/catalog/PR_38/salon_set_taupe_leather_roomset.png",
   },
   {
     id: "chambre",
@@ -34,7 +34,7 @@ const CATEGORIES: CategoryDef[] = [
     label_en: "Bedroom",
     gradient: "from-[#E8E2D5] via-[#D0C9BB] to-[#C8C0B0]",
     mark: "◈",
-    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892949/le01aout/showroom/b6_dsc0913.jpg",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_fill,ar_3:4,g_auto,e_improve,w_900/v1782592110/le01aout/site/cat_bedroom.png",
   },
   {
     id: "salle_a_manger",
@@ -43,25 +43,34 @@ const CATEGORIES: CategoryDef[] = [
     label_en: "Dining Room",
     gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8BFB0]",
     mark: "◇",
-    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781893019/le01aout/showroom/b6_dsc0971.jpg",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_pad,ar_3:4,b_auto,e_improve,w_900/v1782581659/le01aout/catalog/PR_30/dining_set_round_walnut.png",
   },
   {
-    id: "luminaires",
-    label_ar: "إضاءة",
-    label_fr: "Luminaires",
-    label_en: "Lighting",
+    id: "tables_basses",
+    label_ar: "طاولات قهوة",
+    label_fr: "Tables basses",
+    label_en: "Coffee Tables",
     gradient: "from-[#E8E2D5] via-[#D8D1C5] to-[#CCc4B8]",
     mark: "✦",
-    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892919/le01aout/showroom/b6_dsc0890.jpg",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_fill,ar_3:4,g_auto,e_improve,w_900/v1782658036/le01aout/catalog/PR_103/coffee_table_amber_ball_cluster.png",
   },
   {
-    id: "accessoires",
-    label_ar: "إكسسوارات",
-    label_fr: "Accessoires",
-    label_en: "Accessories",
+    id: "consoles",
+    label_ar: "كونصول ومداخل",
+    label_fr: "Consoles",
+    label_en: "Consoles",
     gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8C0B0]",
     mark: "⬟",
-    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892927/le01aout/showroom/b6_dsc0896.jpg",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_fill,ar_3:4,g_auto,e_improve,w_900/v1782581708/le01aout/catalog/PR_50/console_gold_marble_wavy_mirror.png",
+  },
+  {
+    id: "bureau",
+    label_ar: "مكتب",
+    label_fr: "Bureau",
+    label_en: "Office",
+    gradient: "from-[#E8E2D5] via-[#D5CFC3] to-[#C8C0B0]",
+    mark: "▦",
+    image: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,c_fill,ar_3:4,g_auto,e_improve,w_900/v1783360043/le01aout/catalog/PR_361/executive_office_set_bronze_led.png",
   },
 ];
 
@@ -90,12 +99,12 @@ export default function AnimatedCategories() {
     locale === "ar" ? c.label_ar : locale === "fr" ? c.label_fr : c.label_en;
 
   return (
-    <section className="bg-[#F5F1EA] py-16 sm:py-20 border-t border-[#B8956A]/10">
+    <section className="bg-[#F5F1EA] py-10 sm:py-20 border-t border-[#B8956A]/10">
       <div className="container mx-auto px-6">
 
         {/* Bugatti-style section eyebrow */}
         <motion.div
-          className="text-center mb-10 sm:mb-12"
+          className="text-center mb-6 sm:mb-12"
           variants={heading}
           initial="hidden"
           whileInView="visible"

@@ -52,17 +52,27 @@ Three fonts loaded in `app/[locale]/layout.tsx`:
 
 ## Homepage Sections
 
-`app/[locale]/page.tsx` renders: `HeroSection → AnimatedCategories → EditorialRows → FeaturedProductsSection → VisitShowroom CTA → WhatsAppButton`
+`app/[locale]/page.tsx` renders: `Navbar → HeroSection → AnimatedCategories → EditorialRows → FeaturedProductsSection → 3D Design Teaser → Testimonials → FAQ → VisitShowroom CTA → WhatsAppButton`
 
-**HeroSection** — full-bleed video (`/public/hero-video.mp4`) with cream gradient vignettes. Content anchored bottom-left (bottom-right for RTL Arabic). No Three.js — `LuxuryScene.tsx` exists in `components/` but is unused; do not re-import it into HeroSection.
+**Navbar** (`components/Navbar.tsx`) — sticky; cream (`#F5F1EA`), turns solid + shadow when scrolled >40px. Animated framer-motion mobile menu (scroll-locked, closes on route change). Logo is `/public/logo.png` (white line-art on a **transparent** bg) — `invert`ed here so it reads as black on cream; the Footer leaves it white on the dark bg. Language switcher links to the current `pathname` in each other locale.
+
+**HeroSection** — full-bleed video (`/public/hero-video.mp4`) with cream gradient vignettes. `min-h-[85svh]` (mobile-safe), content anchored bottom-left (bottom-right for RTL Arabic). No Three.js — `LuxuryScene.tsx` exists in `components/` but is unused; do not re-import it into HeroSection.
 
 **AnimatedCategories** — 5 category cards, cream section bg, taupe card gradients. Links to `/products?category={id}`.
 
 **EditorialRows** — two alternating full-width image+text rows, cream bg. Second row (`chambre`) uses `/public/homepage.png`. First row (`salon`) still shows gradient placeholder until a photo is added via `row.imageUrl`.
 
-**FeaturedProductsSection** — horizontal snap carousel (`overflow-x-auto snap-x`), `useRef` + `scrollBy` for prev/next arrows. Each `ProductCard` is `snap-start flex-none w-72 sm:w-80`.
+**FeaturedProductsSection** — cream section bg (`bg-[#F5F1EA]`), horizontal snap carousel (`overflow-x-auto snap-x`), `useRef` + `scrollBy` for prev/next arrows. Each `ProductCard` is `snap-start flex-none w-72 sm:w-80`.
 
-**ProductCard** — white card, taupe image bg, no 3D tilt. Hover: `translateY(-3px)` + shadow.
+**ProductCard** — white card (`bg-white`) with taupe border + taupe image bg (`#E8E2D5`), no 3D tilt. Green in-stock badge, text-link "Discover" CTA. Hover: `-translate-y-1` lift + `shadow-lg`, image `scale-105`.
+
+**3D Design Teaser** — inline in `page.tsx` (NOT a component), dark full-width band (`bg-[#1A1814]`) after Featured: image + text, links to `/design`. Wrapped in cream→dark and dark→cream gradient fade strips. RTL swaps image/text order (`lg:order-2`).
+
+**Testimonials** (`components/Testimonials.tsx`) — 5-star review cards with avatar initials + trust header, hover lift. ⚠️ Names are PLACEHOLDERS (Aïcha M. / Mohamed O. / Fatimetou B.) — replace with real reviews before launch.
+
+**FAQ** (`components/FAQ.tsx`) — 6 trilingual Q&As, animated accordion, premium card styling.
+
+**VisitShowroom CTA** — taupe band (`bg-[#E8E2D5]`), address + WhatsApp/Contact buttons. Inline in `page.tsx`.
 
 ---
 

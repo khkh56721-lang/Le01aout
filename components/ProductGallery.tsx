@@ -10,15 +10,31 @@ interface ProductGalleryProps {
   code: string;
 }
 
+// The frame hugs each photo's real shape so there is never an empty band inside
+// the cube. Catalog heroes go up to ~1.8 (2752×1536 room scenes) — the max only
+// guards against degenerate panoramas. Tall shots stay capped so they fit in view.
+const RATIO_MIN = 0.72; // tallest the frame may get (~5:7 portrait)
+const RATIO_MAX = 2.0; // wide room heroes (16:9 ≈ 1.79) now fit edge-to-edge
+
 export default function ProductGallery({ images, name, icon, code }: ProductGalleryProps) {
   const [active, setActive] = useState(0);
+  const [ratio, setRatio] = useState<number | null>(null);
   const hasImages = images.length > 0;
   const current = hasImages ? images[Math.min(active, images.length - 1)] : null;
+  const displayRatio = ratio ? Math.min(RATIO_MAX, Math.max(RATIO_MIN, ratio)) : null;
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Main image */}
-      <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[#F5F1EA] to-[#E8E2D5] border border-[#E8E2D5] shadow-sm">
+    <div className="flex flex-col gap-4 w-full min-w-0">
+      {/* Main image — width always follows the column (min-w-0 keeps it from
+          blowing past the viewport); height derives from the clamped ratio and
+          is capped so tall photos stay in view. */}
+      <div
+        className="relative w-full rounded-3xl overflow-hidden bg-[#F5F1EA] border border-[#E8E2D5] shadow-sm max-h-[78vh]"
+        style={{
+          aspectRatio: displayRatio ? String(displayRatio) : "4 / 3",
+          transition: "aspect-ratio 0.35s ease",
+        }}
+      >
         {current ? (
           <Image
             key={current}
@@ -28,7 +44,13 @@ export default function ProductGallery({ images, name, icon, code }: ProductGall
             sizes="(max-width: 1024px) 100vw, 50vw"
             quality={90}
             priority
-            className="object-cover"
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              if (img.naturalWidth && img.naturalHeight) {
+                setRatio(img.naturalWidth / img.naturalHeight);
+              }
+            }}
+            className="object-contain"
           />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
@@ -54,7 +76,7 @@ export default function ProductGallery({ images, name, icon, code }: ProductGall
               type="button"
               onClick={() => setActive(i)}
               aria-label={`${name} — ${i + 1}`}
-              className={`relative shrink-0 snap-start w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border-2 transition-all ${
+              className={`relative shrink-0 snap-start w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border-2 bg-[#F5F1EA] transition-all ${
                 i === active
                   ? "border-[#B8956A] shadow-md"
                   : "border-[#E8E2D5] opacity-70 hover:opacity-100"
@@ -65,7 +87,7 @@ export default function ProductGallery({ images, name, icon, code }: ProductGall
                 alt={`${name} ${i + 1}`}
                 fill
                 sizes="96px"
-                className="object-cover"
+                className="object-contain p-1"
               />
             </button>
           ))}

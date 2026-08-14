@@ -24,7 +24,7 @@ interface EditorialRow {
 const ROWS: EditorialRow[] = [
   {
     id: "salon",
-    imageUrl: "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892883/le01aout/showroom/b6_dsc0867.jpg",
+    imageUrl: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,w_1600/v1782581668/le01aout/catalog/PR_34/salon_set_grey_leather_roomset.jpg",
     gradient: "from-[#1a1208] via-[#2a1c08] to-[#F5F1EA]",
     eyebrow_ar: "صالونات فاخرة",
     eyebrow_fr: "Salons de Prestige",
@@ -39,7 +39,7 @@ const ROWS: EditorialRow[] = [
   },
   {
     id: "chambre",
-    imageUrl: "/homepage.png",
+    imageUrl: "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,w_1600/v1784039996/le01aout/catalog/PR_5/full_bedroom_wardrobe_a.png",
     gradient: "from-[#0a0a12] via-[#12102a] to-[#F5F1EA]",
     eyebrow_ar: "غرف النوم",
     eyebrow_fr: "Chambres",
@@ -79,7 +79,7 @@ export default function EditorialRows() {
     <div className="bg-[#F5F1EA]">
       {/* ── Section header — Boca do Lobo style ──────────────────────── */}
       <motion.div
-        className="text-center py-16 sm:py-20 px-6 border-t border-[#B8956A]/10"
+        className="text-center py-10 sm:py-20 px-6 border-t border-[#B8956A]/10"
         variants={fadeIn}
         initial="hidden"
         whileInView="visible"
@@ -89,7 +89,7 @@ export default function EditorialRows() {
           {isAr ? "مجموعاتنا المميزة" : locale === "fr" ? "Nos Collections Exclusives" : "Exclusive Collections"}
         </p>
         <h2
-          className="text-4xl sm:text-6xl lg:text-7xl text-[#2A2620] leading-[1.0] tracking-tight"
+          className="text-3xl sm:text-6xl lg:text-7xl text-[#2A2620] leading-[1.0] tracking-tight"
           style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
         >
           {isAr ? "اختيار استثنائي" : locale === "fr" ? "Un choix d'exception" : "An Exceptional Selection"}
@@ -107,7 +107,7 @@ export default function EditorialRows() {
           >
             {/* ── Image panel ────────────────────────────────────────── */}
             <motion.div
-              className={`relative w-full h-[62vw] sm:h-[48vw] lg:h-auto lg:w-[58%] overflow-hidden ${
+              className={`relative w-full h-[46vw] sm:h-[48vw] lg:h-auto lg:w-[58%] overflow-hidden ${
                 isEven ? "lg:order-1" : "lg:order-2"
               }`}
               style={{ maxHeight: "85svh" }}
@@ -151,7 +151,7 @@ export default function EditorialRows() {
 
             {/* ── Text panel ─────────────────────────────────────────── */}
             <motion.div
-              className={`relative w-full lg:w-[42%] flex flex-col justify-center px-6 sm:px-14 lg:px-16 xl:px-20 py-14 sm:py-16 lg:py-0 bg-[#F5F1EA] ${
+              className={`relative w-full lg:w-[42%] flex flex-col justify-center px-6 sm:px-14 lg:px-16 xl:px-20 py-9 sm:py-16 lg:py-0 bg-[#F5F1EA] ${
                 isEven ? "lg:order-2" : "lg:order-1"
               }`}
               variants={fadeIn}
@@ -166,7 +166,7 @@ export default function EditorialRows() {
 
               {/* ── SERIF headline — Cormorant Garamond signature ── */}
               <h2
-                className="text-[2.75rem] sm:text-6xl lg:text-[clamp(3rem,4.5vw,5rem)] text-[#2A2620] leading-[1.02] mb-8 whitespace-pre-line"
+                className="text-[2rem] sm:text-6xl lg:text-[clamp(3rem,4.5vw,5rem)] text-[#2A2620] leading-[1.02] mb-5 whitespace-pre-line"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 300,
@@ -181,7 +181,7 @@ export default function EditorialRows() {
               <div className="w-10 h-px bg-[#B8956A] mb-8" />
 
               {/* Body text */}
-              <p className="text-sm sm:text-base text-[#6B6358] leading-[1.8] max-w-[360px] mb-12 font-light">
+              <p className="text-sm sm:text-base text-[#6B6358] leading-[1.8] max-w-[360px] mb-7 font-light">
                 {pick(row, "sub")}
               </p>
 

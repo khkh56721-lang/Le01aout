@@ -11,7 +11,7 @@ import FAQ from "@/components/FAQ";
 import products from "../../../data/products.json";
 
 const DESIGN_TEASER_IMG =
-  "https://res.cloudinary.com/ddjmrcbdw/image/upload/v1781892949/le01aout/showroom/b6_dsc0913.jpg";
+  "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,w_1600/v1782586573/le01aout/site/design_3d.png";
 
 export default async function HomePage() {
   const locale = await getLocale();
@@ -22,7 +22,7 @@ export default async function HomePage() {
   const showroomTitle =
     locale === "ar" ? "نواكشوط، موريتانيا" : locale === "fr" ? "Nouakchott, Mauritanie" : "Nouakchott, Mauritania";
   const showroomAddress =
-    locale === "ar" ? "طريق صكوك، تفرغ زينة" : locale === "fr" ? "Tevragh Zeina, Route Socogim" : "Tevragh Zeina, Socogim Road";
+    locale === "ar" ? "طريق صكوك، نواكشوط" : locale === "fr" ? "Route Sukuk, Nouakchott" : "Route Sukuk, Nouakchott";
   const whatsappLabel =
     locale === "ar" ? "تواصل واتساب" : locale === "fr" ? "WhatsApp" : "WhatsApp";
   const contactLabel =
@@ -32,19 +32,19 @@ export default async function HomePage() {
   const designEyebrow =
     locale === "ar" ? "خدمة جديدة" : locale === "fr" ? "Nouveau service" : "New service";
   const designTitle =
-    locale === "ar" ? "صمّمنا مساحتك ثلاثيّة الأبعاد قبل أن نبنيها"
-    : locale === "fr" ? "Votre espace en 3D avant même de le construire"
-    : "Your space in 3D before we build it";
+    locale === "ar" ? "نصمّم، نصنّع، ونركّب — على ذوقك"
+    : locale === "fr" ? "Nous concevons, fabriquons et installons — sur mesure"
+    : "We design, manufacture and install — made to measure";
   const designText =
-    locale === "ar" ? "خدمة تصميم هندسي ثلاثي الأبعاد متكاملة — تُشاهد منزلك أو مشروعك كاملًا قبل التنفيذ، ثم ننفّذه بإشرافٍ هندسيٍّ كامل من الفكرة حتى التسليم."
-    : locale === "fr" ? "Un service de design 3D intégral — visualisez votre maison ou votre projet en entier avant les travaux, puis nous le réalisons sous supervision d'ingénierie, de l'idée à la livraison."
-    : "An integrated 3D engineering design service — see your home or project in full before any work, then we build it under complete engineering supervision, from idea to handover.";
+    locale === "ar" ? "من الجدران الخشبية ووحدات التلفزيون إلى الأثاث حسب الطلب — نصمّم مشروعك ثلاثي الأبعاد لتشاهده قبل التنفيذ، ثم نصنّعه في ورشتنا ونركّبه في بيتك بإشرافٍ هندسيٍّ كامل."
+    : locale === "fr" ? "Murs en bois, meubles TV, mobilier sur mesure — nous concevons votre projet en 3D pour le voir avant les travaux, puis notre atelier le fabrique et l'installe chez vous, sous supervision d'ingénierie."
+    : "Wood-panel walls, TV walls, custom furniture — we design your project in 3D so you see it first, then our own workshop manufactures and installs it under full engineering supervision.";
   const designPoints =
-    locale === "ar" ? ["شاهد قبل التنفيذ", "خبرة تقلّل الأخطاء", "تنفيذ متكامل ومضمون"]
-    : locale === "fr" ? ["Visualisez avant les travaux", "Une expertise sans erreurs", "Exécution intégrale & garantie"]
-    : ["See it before you build", "Expertise that prevents errors", "End-to-end, guaranteed execution"];
+    locale === "ar" ? ["تصميم ثلاثي الأبعاد قبل التنفيذ", "تصنيع في ورشتنا الخاصة", "تركيب وتسليم مضمون"]
+    : locale === "fr" ? ["Design 3D avant les travaux", "Fabrication dans notre atelier", "Pose & livraison garanties"]
+    : ["3D design before any work", "Made in our own workshop", "Guaranteed installation & handover"];
   const designCta =
-    locale === "ar" ? "اكتشف التصميم ثلاثي الأبعاد" : locale === "fr" ? "Découvrir le design 3D" : "Discover 3D design";
+    locale === "ar" ? "اكتشف التصميم والتصنيع" : locale === "fr" ? "Découvrir l'atelier" : "Discover design & manufacturing";
 
   return (
     <>
@@ -63,11 +63,12 @@ export default async function HomePage() {
       <FeaturedProductsSection products={featured} />
 
       {/* ── 3D DESIGN TEASER ────────────────────────────────────────────── */}
-      {/* Smooth fade from cream into the dark feature band */}
-      <div className="h-20 bg-gradient-to-b from-[#F5F1EA] to-[#1A1814]" aria-hidden />
+      {/* Tall warm fade from cream into the dark feature band — the light dims
+          through the palette's warm grey instead of cutting to black */}
+      <div className="h-24 sm:h-40 bg-gradient-to-b from-[#F5F1EA] via-[#6B6358] to-[#1A1814]" aria-hidden />
       <section className="bg-[#1A1814] text-white">
         <div className="grid lg:grid-cols-2 items-stretch">
-          <div className={`relative min-h-[320px] lg:min-h-[520px] ${isAr ? "lg:order-2" : ""}`}>
+          <div className={`relative min-h-[200px] lg:min-h-[520px] ${isAr ? "lg:order-2" : ""}`}>
             <Image
               src={DESIGN_TEASER_IMG}
               alt={designTitle}
@@ -78,7 +79,7 @@ export default async function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1A1814]/60 via-transparent to-transparent lg:bg-gradient-to-r" />
           </div>
-          <div className={`flex items-center px-6 sm:px-12 lg:px-16 py-16 lg:py-24 ${isAr ? "text-right" : ""}`}>
+          <div className={`flex items-center px-6 sm:px-12 lg:px-16 py-10 sm:py-16 lg:py-24 ${isAr ? "text-right" : ""}`}>
             <div className="max-w-lg">
               <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#B8956A] mb-5">
                 {designEyebrow}
@@ -89,8 +90,8 @@ export default async function HomePage() {
               >
                 {designTitle}
               </h2>
-              <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-8">{designText}</p>
-              <ul className={`space-y-3 mb-10 ${isAr ? "flex flex-col items-end" : ""}`}>
+              <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-5">{designText}</p>
+              <ul className={`space-y-2.5 mb-6 ${isAr ? "flex flex-col items-end" : ""}`}>
                 {designPoints.map((p) => (
                   <li key={p} className="flex items-center gap-3 text-sm text-white/90">
                     <span className="text-[#B8956A]">✦</span>
@@ -109,8 +110,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-      {/* Smooth fade from the dark band back into cream */}
-      <div className="h-20 bg-gradient-to-b from-[#1A1814] to-[#F5F1EA]" aria-hidden />
+      {/* Tall warm fade from the dark band back into cream */}
+      <div className="h-24 sm:h-40 bg-gradient-to-b from-[#1A1814] via-[#6B6358] to-[#F5F1EA]" aria-hidden />
 
       {/* ── TESTIMONIALS ────────────────────────────────────────────────── */}
       <Testimonials />
@@ -119,13 +120,13 @@ export default async function HomePage() {
       <FAQ />
 
       {/* ── VISIT SHOWROOM CTA ──────────────────────────────────────────── */}
-      <section className="bg-[#E8E2D5] py-16 sm:py-20 border-t border-[#B8956A]/20 text-center">
+      <section className="bg-[#E8E2D5] py-10 sm:py-20 border-t border-[#B8956A]/20 text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <p className="text-[10px] tracking-[0.4em] uppercase font-mono text-[#B8956A] mb-4">
             {showroomEyebrow}
           </p>
           <h2
-            className="text-4xl sm:text-5xl text-[#2A2620] mb-4"
+            className="text-3xl sm:text-5xl text-[#2A2620] mb-4"
             style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
           >
             {showroomTitle}
@@ -155,6 +156,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+      {/* Ease the taupe showroom band into the dark footer — no hard cut */}
+      <div className="h-16 sm:h-24 bg-gradient-to-b from-[#E8E2D5] via-[#6B6358] to-[#1A1814]" aria-hidden />
 
       <WhatsAppButton />
     </>

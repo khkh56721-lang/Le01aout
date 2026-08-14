@@ -5,14 +5,14 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import Reveal from "@/components/Reveal";
 
 const SHOWROOM = "https://res.cloudinary.com/ddjmrcbdw/image/upload";
-const HERO_IMG = `${SHOWROOM}/v1781893027/le01aout/showroom/b6_dsc0974.jpg`;
+const HERO_IMG = `${SHOWROOM}/f_auto,q_auto,w_1920/v1782590438/le01aout/site/design_hero_ba.png`;
 const PORTFOLIO = [
-  `${SHOWROOM}/v1781892883/le01aout/showroom/b6_dsc0867.jpg`,
-  `${SHOWROOM}/v1781892916/le01aout/showroom/b6_dsc0889.jpg`,
-  `${SHOWROOM}/v1781892998/le01aout/showroom/b6_dsc0954.jpg`,
-  `${SHOWROOM}/v1781893019/le01aout/showroom/b6_dsc0971.jpg`,
-  `${SHOWROOM}/v1781892949/le01aout/showroom/b6_dsc0913.jpg`,
-  `${SHOWROOM}/v1781892979/le01aout/showroom/b6_dsc0935.jpg`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783863903/le01aout/site/mfr_tvwall.png`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783863932/le01aout/site/mfr_bedroom.png`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783863981/le01aout/site/design_3d_render.png`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783864016/le01aout/site/design_result.png`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783864002/le01aout/site/design_engineer.png`,
+  `${SHOWROOM}/f_auto,q_auto,w_1200/v1783863953/le01aout/site/mfr_workshop.png`,
 ];
 
 export default async function DesignPage() {
@@ -23,9 +23,9 @@ export default async function DesignPage() {
 
   const waUrl = `https://wa.me/22233322232?text=${encodeURIComponent(
     tr(
-      "مرحبا، أريد الاستفسار عن خدمة التصميم الهندسي ثلاثي الأبعاد",
-      "Bonjour, je souhaite en savoir plus sur le service de design 3D",
-      "Hello, I'd like to know more about your 3D engineering design service"
+      "مرحبا، أريد الاستفسار عن خدمة التصميم والتصنيع حسب الطلب",
+      "Bonjour, je souhaite en savoir plus sur le service de design 3D et fabrication sur mesure",
+      "Hello, I'd like to know more about your design and custom manufacturing service"
     )
   )}`;
 
@@ -50,11 +50,11 @@ export default async function DesignPage() {
     },
     {
       icon: "⬗",
-      title: tr("تنفيذ متكامل", "Exécution intégrale", "End-to-end execution"),
+      title: tr("نصنّع في ورشتنا", "Fabriqué dans notre atelier", "Made in our own workshop"),
       text: tr(
-        "لا نتوقف عند التصميم — بل نحوّل مشروعك إلى واقعٍ ملموس على أيدي مختصّين.",
-        "Nous ne nous arrêtons pas au design — nous concrétisons votre projet avec nos spécialistes.",
-        "We don't stop at the design — we turn your project into reality through our specialists."
+        "جدران خشبية، وحدات تلفزيون، أثاث حسب الطلب — نصنّعها بأيدينا في ورشتنا الخاصة، لا نبيع الجاهز فقط.",
+        "Murs en bois, meubles TV, mobilier sur mesure — fabriqués de nos mains dans notre propre atelier.",
+        "Wood-panel walls, TV walls, custom furniture — built by our own hands in our own workshop."
       ),
     },
     {
@@ -86,13 +86,13 @@ export default async function DesignPage() {
     },
     {
       n: "04",
-      title: tr("التنفيذ", "Réalisation", "Fabrication"),
-      text: tr("ينفّذ مختصّونا المشروع بدقة هندسية.", "Nos spécialistes réalisent le projet avec précision.", "Our specialists build the project with engineering precision."),
+      title: tr("التصنيع في ورشتنا", "Fabrication en atelier", "Workshop fabrication"),
+      text: tr("يصنع نجّارونا كل قطعة وجدار خشبي في ورشتنا الخاصة بدقة.", "Nos menuisiers fabriquent chaque pièce et panneau dans notre propre atelier.", "Our carpenters craft every piece and panel in our own workshop."),
     },
     {
       n: "05",
-      title: tr("التسليم", "Livraison", "Delivery"),
-      text: tr("نسلّمك مساحتك كما رأيتها تمامًا.", "Nous vous livrons votre espace tel que vous l'avez vu.", "We hand over your space exactly as you saw it."),
+      title: tr("التركيب والتسليم", "Pose & livraison", "Installation & handover"),
+      text: tr("نركّب كل شيء في بيتك ونسلّمك مساحتك كما رأيتها تمامًا.", "Nous installons tout chez vous et livrons votre espace tel que validé.", "We install everything and hand over your space exactly as approved."),
     },
   ];
 
@@ -125,13 +125,13 @@ export default async function DesignPage() {
               {tr("المهندس إبراهيم والكادر الهندسي", "Ingénieur Ibrahim & l'équipe technique", "Engineer Ibrahim & the technical team")}
             </p>
             <h1 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl md:text-7xl italic font-light text-white leading-[1.05] mb-6">
-              {tr("من الفكرة إلى الواقع، بتصميم ثلاثي الأبعاد", "De l'idée à la réalité, en 3D", "From idea to reality, in full 3D")}
+              {tr("نصمّمها، نصنّعها، ونركّبها في بيتك", "Conçu en 3D, fabriqué en atelier, installé chez vous", "Designed in 3D, made in our workshop, installed in your home")}
             </h1>
             <p className="text-base sm:text-lg text-white/80 leading-relaxed mb-9 max-w-xl">
               {tr(
-                "خدمة تصميم هندسي ثلاثي الأبعاد متكاملة — تُشاهد مساحتك قبل تنفيذها، بإشرافٍ هندسيٍّ كامل من الفكرة حتى التسليم.",
-                "Un service de design 3D intégral — visualisez votre espace avant sa réalisation, sous supervision d'ingénierie de l'idée à la livraison.",
-                "An integrated 3D engineering design service — see your space before it's built, with full engineering supervision from idea to handover."
+                "جدران خشبية، وحدات تلفزيون، أثاث حسب الطلب — تشاهد مشروعك ثلاثي الأبعاد قبل التنفيذ، ثم يصنّعه فريقنا في ورشتنا ويركّبه بإشرافٍ هندسيٍّ كامل.",
+                "Murs en bois, meubles TV, mobilier sur mesure — visualisez votre projet en 3D avant les travaux, puis notre atelier le fabrique et l'installe, sous supervision d'ingénierie.",
+                "Wood-panel walls, TV walls, custom furniture — see your project in 3D before any work, then our workshop manufactures and installs it under full engineering supervision."
               )}
             </p>
             <div className={`flex flex-col sm:flex-row gap-3 ${isAr ? "sm:justify-end" : ""}`}>
@@ -233,7 +233,7 @@ export default async function DesignPage() {
         <div className="container mx-auto px-6">
           <Reveal className="text-center py-16">
             <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#B8956A] mb-3">
-              {tr("من معرضنا", "Notre showroom", "From our showroom")}
+              {tr("من أعمالنا", "Nos réalisations", "Our work")}
             </p>
             <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-[#2A2620]">
               {tr("أعمالٌ تتحدث عن نفسها", "Des réalisations qui parlent", "Work that speaks for itself")}
@@ -272,7 +272,7 @@ export default async function DesignPage() {
             )}
           </p>
           <p className="text-[#B8956A] text-sm tracking-wider mb-10" dir="ltr">
-            {tr("طريق صكوك، نواكشوط", "Route Sekou, Nouakchott", "Route Sekou, Nouakchott")}
+            {tr("طريق صكوك، نواكشوط", "Route Sukuk, Nouakchott", "Route Sukuk, Nouakchott")}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a

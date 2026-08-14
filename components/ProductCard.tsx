@@ -7,6 +7,7 @@ interface Product {
   id: string;
   name_ar: string;
   name_fr: string;
+  name_en?: string;
   category: string;
   subcategory?: string;
   price_mru: number | null;
@@ -23,10 +24,21 @@ const CATEGORY_ICONS: Record<string, string> = {
   khaima: "⛺", jalsat: "🛋️",
 };
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  compact = false,
+}: {
+  product: Product;
+  compact?: boolean;
+}) {
   const locale = useLocale();
   const t = useTranslations("product");
-  const name = locale === "ar" ? product.name_ar : product.name_fr;
+  const name =
+    locale === "ar"
+      ? product.name_ar
+      : locale === "en"
+        ? product.name_en || product.name_fr
+        : product.name_fr;
   const image = product.images?.[0];
   const icon = CATEGORY_ICONS[product.subcategory ?? ""] ?? "🏠";
 
@@ -44,7 +56,11 @@ export default function ProductCard({ product }: { product: Product }) {
             src={image}
             alt={name}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes={
+              compact
+                ? "(max-width: 640px) 45vw, (max-width: 1024px) 33vw, 25vw"
+                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
             quality={90}
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
@@ -57,22 +73,22 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Badges */}
         <div className="absolute top-3 start-3 flex flex-col gap-1">
-          {product.made_to_order && (
-            <span className="bg-[#B8956A] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-              {t("made_to_order")}
+          {product.in_stock !== false && (
+            <span className="bg-[#5A7D4F] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              {t("in_stock")}
             </span>
           )}
         </div>
       </Link>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className={`${compact ? "p-3 sm:p-5" : "p-5"} flex flex-col flex-1`}>
         <p className="text-[10px] text-[#6B6358] uppercase tracking-widest mb-1 font-mono">
           {product.category.replace("_", " ")}
         </p>
         <Link href={`/products/${product.id}`}>
           <h3
-            className="text-[#2A2620] text-lg leading-snug mb-3 line-clamp-2 hover:text-[#B8956A] transition-colors"
+            className={`text-[#2A2620] ${compact ? "text-sm sm:text-lg mb-2 sm:mb-3" : "text-lg mb-3"} leading-snug line-clamp-2 hover:text-[#B8956A] transition-colors`}
             style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 400, fontStyle: "italic" }}
           >
             {name}

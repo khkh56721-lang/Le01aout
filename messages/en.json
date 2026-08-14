@@ -1,76 +1,88 @@
 {
-  "nav": {
-    "home": "Home",
-    "products": "Products",
-    "design": "3D Design",
-    "about": "About",
-    "contact": "Contact"
-  },
-  "home": {
-    "hero_title": "Luxury starts at home",
-    "hero_subtitle": "Premium furniture & decoration in the heart of Nouakchott",
-    "hero_cta": "Browse Products",
-    "whatsapp_cta": "Contact via WhatsApp",
-    "featured_title": "Featured Products",
-    "categories_title": "Browse by Category"
-  },
-  "product": {
-    "request_whatsapp": "Order via WhatsApp",
-    "inquire": "Ask for price",
-    "made_to_order": "Made to order",
-    "in_stock": "In stock",
-    "out_of_stock": "Out of stock",
-    "back_to_products": "← Back to products",
-    "description": "Description",
-    "specs": "Specifications",
-    "colors": "Available colors",
-    "materials": "Materials",
-    "dimensions": "Dimensions",
-    "category": "Category",
-    "code": "Product code",
-    "related": "You might also like",
-    "not_found": "Product not found"
-  },
-  "categories": {
-    "salon": "Living Room",
-    "chambre": "Bedroom",
-    "salle_a_manger": "Dining Room",
-    "cuisine": "Kitchen",
-    "luminaires": "Lighting",
-    "accessoires": "Accessories",
-    "all": "All"
-  },
-  "about": {
-    "title": "Our story",
-    "intro": "For over 5 years, Le Premier Aout Decor has been dressing the finest homes in Nouakchott.",
-    "story_title": "A heritage of craftsmanship",
-    "story_text": "Born from a deep passion for interior design and fine craftsmanship, Le Premier Aout Decor has become a reference in premium furniture in Mauritania. Every piece in our catalog — from the Shiba salon to the Prada bedroom — is hand-picked for its elegance, durability, and ability to transform a space into a genuine experience.",
-    "values_title": "Our values",
-    "value1_title": "Uncompromising quality",
-    "value1_text": "Noble materials, careful finishes, and meticulous attention to detail in every product.",
-    "value2_title": "Personalized service",
-    "value2_text": "Tailored advice, home delivery, and after-sales support — via WhatsApp, anytime.",
-    "value3_title": "Made to order",
-    "value3_text": "Certain pieces can be adapted to your dimensions and preferences — just tell us.",
-    "cta_title": "Have a project in mind?",
-    "cta_text": "Send us a WhatsApp message — we reply the same day."
-  },
-  "contact": {
-    "title": "Contact us",
-    "subtitle": "We're here to help — WhatsApp, phone, or in-store.",
-    "phone": "Phone",
-    "whatsapp": "WhatsApp",
-    "whatsapp_cta": "Open WhatsApp",
-    "address": "Address",
-    "address_value": "Route Sukuk, Nouakchott, Mauritania",
-    "directions": "View on Google Maps",
-    "hours": "Opening hours",
-    "hours_value": "Daily · 9:00 AM — 9:00 PM",
-    "social": "Follow us",
-    "email": "Email"
-  },
-  "footer": {
-    "tagline": "Luxury in every detail",
-    "copyright": "© 2026 Le Premier Aout Decor. All rights reserved."
-  }
+ "nav": {
+  "home": "Home",
+  "products": "Products",
+  "design": "Design & Manufacturing",
+  "about": "About",
+  "contact": "Contact"
+ },
+ "home": {
+  "hero_title": "Luxury starts at home",
+  "hero_subtitle": "Premium furniture & decoration in the heart of Nouakchott",
+  "hero_cta": "Browse Products",
+  "whatsapp_cta": "Contact via WhatsApp",
+  "featured_title": "Featured Products",
+  "categories_title": "Browse by Category"
+ },
+ "product": {
+  "request_whatsapp": "Order via WhatsApp",
+  "inquire": "Ask for price",
+  "made_to_order": "Made to order",
+  "in_stock": "In stock",
+  "out_of_stock": "Out of stock",
+  "back_to_products": "← Back to products",
+  "description": "Description",
+  "specs": "Specifications",
+  "colors": "Available colors",
+  "materials": "Materials",
+  "dimensions": "Dimensions",
+  "category": "Category",
+  "code": "Product code",
+  "related": "You might also like",
+  "not_found": "Product not found"
+ },
+ "categories": {
+  "salon": "Living Room",
+  "chambre": "Bedroom",
+  "chambre_enfant": "Kids Room",
+  "salle_a_manger": "Dining Room",
+  "tables_basses": "Coffee Tables",
+  "consoles": "Consoles & Entryway",
+  "tableaux": "Wall Art",
+  "miroirs": "Mirrors",
+  "chariots": "Bar Carts",
+  "chaises": "Chairs & Armchairs",
+  "bureau": "Office",
+  "plantes": "Plants & Stands",
+  "luminaires": "Lighting",
+  "accessoires": "Accessories",
+  "all": "All",
+  "meuble_tv": "TV Stands",
+  "vase": "Vases",
+  "food_service": "Tableware",
+  "couvre_lits": "Bedspreads"
+ },
+ "about": {
+  "title": "Our story",
+  "intro": "For over 5 years, Le Premier Aout Decor has been dressing the finest homes in Nouakchott.",
+  "story_title": "A heritage of craftsmanship",
+  "story_text": "Born from a deep passion for interior design and fine craftsmanship, Le Premier Aout Decor has become a reference in premium furniture in Mauritania. Every piece in our catalog — from the Shiba salon to the Prada bedroom — is hand-picked for its elegance, durability, and ability to transform a space into a genuine experience.",
+  "values_title": "Our values",
+  "value1_title": "Uncompromising quality",
+  "value1_text": "Noble materials, careful finishes, and meticulous attention to detail in every product.",
+  "value2_title": "Personalized service",
+  "value2_text": "Tailored advice, home delivery, and after-sales support — via WhatsApp, anytime.",
+  "value3_title": "Made to order",
+  "value3_text": "Certain pieces can be adapted to your dimensions and preferences — just tell us.",
+  "cta_title": "Have a project in mind?",
+  "cta_text": "Send us a WhatsApp message — we reply the same day."
+ },
+ "contact": {
+  "title": "Contact us",
+  "subtitle": "We're here to help — WhatsApp, phone, or in-store.",
+  "phone": "Phone",
+  "whatsapp": "WhatsApp",
+  "whatsapp_cta": "Open WhatsApp",
+  "address": "Address",
+  "address_value": "Route Sukuk, Nouakchott, Mauritania",
+  "directions": "View on Google Maps",
+  "hours": "Opening hours",
+  "hours_value": "Daily · 9:00 AM — 11:00 PM",
+  "social": "Follow us",
+  "email": "Email"
+ },
+ "footer": {
+  "tagline": "Luxury in every detail",
+  "copyright": "© 2026 Le Premier Aout Decor. All rights reserved."
+ }
 }

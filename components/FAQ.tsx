@@ -54,9 +54,9 @@ const FAQS: QA[] = [
     q_ar: "أين يقع معرضكم؟",
     q_fr: "Où se trouve votre showroom ?",
     q_en: "Where is your showroom?",
-    a_ar: "معرضنا في طريق صكوك، تفرغ زينة، نواكشوط، موريتانيا. نرحّب بزيارتكم.",
-    a_fr: "Notre showroom se situe Route Socogim, Tevragh Zeina, Nouakchott, Mauritanie. Vous êtes les bienvenus.",
-    a_en: "Our showroom is on Route Socogim, Tevragh Zeina, Nouakchott, Mauritania. You're welcome to visit.",
+    a_ar: "معرضنا في طريق صكوك، نواكشوط، موريتانيا. نرحّب بزيارتكم.",
+    a_fr: "Notre showroom se situe Route Sukuk, Nouakchott, Mauritanie. Vous êtes les bienvenus.",
+    a_en: "Our showroom is on Route Sukuk, Nouakchott, Mauritania. You're welcome to visit.",
   },
 ];
 
@@ -67,9 +67,9 @@ export default function FAQ() {
     locale === "ar" ? ar : locale === "fr" ? fr : en;
 
   return (
-    <section className="bg-[#E8E2D5] py-20 sm:py-24 border-t border-[#B8956A]/20">
+    <section className="bg-[#F5F1EA] py-12 sm:py-24">
       <div className="container mx-auto px-6 max-w-3xl">
-        <Reveal className="text-center mb-12">
+        <Reveal className="text-center mb-8 sm:mb-12">
           <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#B8956A] mb-3">
             {tr("أسئلة شائعة", "Questions fréquentes", "FAQ")}
           </p>

@@ -49,11 +49,11 @@ export default function FeaturedProductsSection({ products }: { products: Produc
   if (!products.length) return null;
 
   return (
-    <section className="bg-[#F5F1EA] py-16 sm:py-20">
+    <section className="bg-[#F5F1EA] py-10 sm:py-20">
       <div className="container mx-auto px-6">
         {/* Heading row with scroll arrows */}
         <motion.div
-          className="flex items-end justify-between mb-8 sm:mb-10"
+          className="flex items-end justify-between mb-6 sm:mb-10"
           variants={headingVariant}
           initial="hidden"
           whileInView="visible"
@@ -64,7 +64,7 @@ export default function FeaturedProductsSection({ products }: { products: Produc
               {featuredLabel}
             </p>
             <h2
-              className="text-4xl sm:text-5xl text-[#2A2620] leading-tight"
+              className="text-3xl sm:text-5xl text-[#2A2620] leading-tight"
               style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontStyle: "italic" }}
             >
               {sectionTitle}

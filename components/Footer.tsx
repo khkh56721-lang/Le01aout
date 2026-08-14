@@ -17,7 +17,7 @@ export default function Footer() {
       products: "المنتجات",
       about: "من نحن",
       contact_us: "اتصل بنا",
-      address: "تفرغ زينة، خلف المركزية",
+      address: "طريق صكوك",
       rights: "جميع الحقوق محفوظة."
     },
     fr: {
@@ -29,7 +29,7 @@ export default function Footer() {
       products: "Produits",
       about: "À propos",
       contact_us: "Contact",
-      address: "Tevragh Zeina, Derrière la centrale",
+      address: "Route Sukuk",
       rights: "Tous droits réservés."
     },
     en: {
@@ -41,7 +41,7 @@ export default function Footer() {
       products: "Products",
       about: "About",
       contact_us: "Contact",
-      address: "Tevragh Zeina, Behind Central",
+      address: "Route Sukuk",
       rights: "All rights reserved."
     }
   };
@@ -101,7 +101,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>{t.address}<br/>Nouakchott, Mauritanie</span>
+                <span>{t.address}<br/>{locale === "ar" ? "نواكشوط، موريتانيا" : locale === "fr" ? "Nouakchott, Mauritanie" : "Nouakchott, Mauritania"}</span>
               </li>
               <li className="flex items-center gap-3">
                 <svg className="w-5 h-5 text-[#B8956A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">

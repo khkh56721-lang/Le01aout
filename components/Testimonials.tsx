@@ -88,10 +88,10 @@ export default function Testimonials() {
     locale === "ar" ? ar : locale === "fr" ? fr : en;
 
   return (
-    <section className="bg-[#F5F1EA] py-20 sm:py-24">
+    <section className="bg-[#F5F1EA] py-12 sm:py-24">
       <div className="container mx-auto px-6">
         {/* Header + trust summary */}
-        <Reveal className="text-center mb-14 max-w-2xl mx-auto">
+        <Reveal className="text-center mb-8 sm:mb-14 max-w-2xl mx-auto">
           <p className="text-[10px] tracking-[0.45em] uppercase font-mono text-[#B8956A] mb-3">
             {tr("آراء عملائنا", "Témoignages", "Testimonials")}
           </p>

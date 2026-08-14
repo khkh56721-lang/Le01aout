@@ -1,15 +1,17 @@
 "use client";
 
-export default function WhatsAppButton({
-  productName,
-}: {
-  productName?: string;
-}) {
-  const message = productName
-    ? `مرحبا، أريد الاستفسار عن: ${productName}`
-    : "مرحبا، أريد الاستفسار عن منتجاتكم";
+import { generalWhatsAppMessage, whatsAppUrl } from "@/lib/whatsapp";
 
-  const url = `https://wa.me/22233322232?text=${encodeURIComponent(message)}`;
+export default function WhatsAppButton({
+  message,
+  locale,
+}: {
+  /** Prefilled text. Product pages pass the full enquiry (name + PR_ code + link)
+   *  so this button identifies the item just like the in-page CTA. */
+  message?: string;
+  locale?: string;
+}) {
+  const url = whatsAppUrl(message ?? generalWhatsAppMessage(locale));
 
   return (
     <a

@@ -39,6 +39,7 @@ export const viewport: Viewport = {
 };
 
 import Footer from "@/components/Footer";
+import Analytics from "@/components/Analytics";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -81,9 +82,18 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
+      data-scroll-behavior="smooth"
       className={`${cairo.variable} ${cormorant.variable} ${manrope.variable}`}
     >
       <body className="bg-[#F5F1EA] text-[#2A2620] font-sans antialiased flex flex-col min-h-screen">
+        <Analytics />
+        {process.env.NEXT_PUBLIC_CF_BEACON_TOKEN ? (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_BEACON_TOKEN}"}`}
+          />
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

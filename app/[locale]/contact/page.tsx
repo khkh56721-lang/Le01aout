@@ -10,8 +10,8 @@ export default async function ContactPage() {
   const EMAIL = "contact@le01aout.com";
   const waMessage = "مرحبا، أريد الاستفسار";
   const waUrl = `https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(waMessage)}`;
-  const mapsUrl = `https://www.google.com/maps/place/Le+01+aout/@18.1256621,-15.9658079,17z`;
-  const mapsEmbed = `https://www.google.com/maps?q=18.1256621,-15.9658079&z=17&output=embed`;
+  const mapsUrl = `https://www.google.com/maps?cid=18308411846868116313`;
+  const mapsEmbed = `https://www.google.com/maps?cid=18308411846868116313&output=embed`;
 
   const cards = [
     {
