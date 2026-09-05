@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SOCIAL_SAME_AS } from "@/lib/social";
 import { Cairo, Cormorant_Garamond, Manrope } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -59,11 +60,7 @@ const jsonLd = {
     addressLocality: "Nouakchott",
     addressCountry: "MR",
   },
-  sameAs: [
-    "https://www.instagram.com/le01_aout",
-    "https://www.tiktok.com/@le_01_aout_deco",
-    "https://www.facebook.com/profile.php?id=61578655620948",
-  ],
+  sameAs: SOCIAL_SAME_AS,
 };
 
 export default async function LocaleLayout({

@@ -2,13 +2,14 @@ import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import HeroSection from "@/components/HeroSection";
+import HeroHouseTour from "@/components/HeroHouseTour";
 import AnimatedCategories from "@/components/AnimatedCategories";
 import EditorialRows from "@/components/EditorialRows";
 import FeaturedProductsSection from "@/components/FeaturedProductsSection";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import products from "../../../data/products.json";
+import { getTourRooms } from "@/lib/houseTour";
 
 const DESIGN_TEASER_IMG =
   "https://res.cloudinary.com/ddjmrcbdw/image/upload/f_auto,q_auto,w_1600/v1782586573/le01aout/site/design_3d.png";
@@ -16,6 +17,7 @@ const DESIGN_TEASER_IMG =
 export default async function HomePage() {
   const locale = await getLocale();
   const featured = products.slice(0, 6);
+  const tourRooms = getTourRooms();
 
   const showroomEyebrow =
     locale === "ar" ? "زوروا معرضنا" : locale === "fr" ? "Visitez notre showroom" : "Visit our showroom";
@@ -50,8 +52,8 @@ export default async function HomePage() {
     <>
       <Navbar />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <HeroSection />
+      {/* ── HERO — scroll-driven walk through five real rooms ────────────── */}
+      <HeroHouseTour rooms={tourRooms} />
 
       {/* ── CATEGORIES ──────────────────────────────────────────────────── */}
       <AnimatedCategories />

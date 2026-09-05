@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import Image from "next/image";
+import ProtectedImage from "@/components/ProtectedImage";
 
 interface CategoryDef {
   id: string;
@@ -135,7 +135,7 @@ export default function AnimatedCategories() {
               >
                 {/* Background — photo or gradient */}
                 {cat.image ? (
-                  <Image
+                  <ProtectedImage
                     src={cat.image}
                     alt={label(cat)}
                     fill

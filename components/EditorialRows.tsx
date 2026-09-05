@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import Image from "next/image";
+import ProtectedImage from "@/components/ProtectedImage";
 
 interface EditorialRow {
   id: string;
@@ -117,7 +117,7 @@ export default function EditorialRows() {
               viewport={{ once: true, margin: "-100px" }}
             >
               {row.imageUrl ? (
-                <Image
+                <ProtectedImage
                   src={row.imageUrl}
                   alt={pick(row, "title")}
                   fill

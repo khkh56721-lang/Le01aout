@@ -1,4 +1,6 @@
 import { getTranslations } from "next-intl/server";
+import { SOCIAL, SOCIAL_APP } from "@/lib/social";
+import SocialLink from "@/components/SocialLink";
 import Navbar from "@/components/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -149,24 +151,22 @@ export default async function ContactPage() {
                 {t("social")}
               </h3>
               <div className="flex gap-3">
-                <a
-                  href="https://instagram.com/le01_aout"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <SocialLink
+                  href={SOCIAL.instagram}
+                  appHref={SOCIAL_APP.instagram}
                   className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"
                 >
                   Instagram
-                </a>
-                <a
-                  href="https://tiktok.com/@le_01_aout_deco"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </SocialLink>
+                <SocialLink
+                  href={SOCIAL.tiktok}
+                  appHref={SOCIAL_APP.tiktok}
                   className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"
                 >
                   TikTok
-                </a>
+                </SocialLink>
                 <a
-                  href="https://snapchat.com/add/le01_aoutdeco"
+                  href={SOCIAL.snapchat}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 text-center bg-white/10 hover:bg-[#B8956A] hover:text-white py-3 rounded-xl text-sm font-bold transition-all"

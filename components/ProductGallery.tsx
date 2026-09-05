@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import ProtectedImage from "@/components/ProtectedImage";
+import { productImage, thumbImage } from "@/lib/watermark";
 
 interface ProductGalleryProps {
   images: string[];
@@ -36,9 +37,9 @@ export default function ProductGallery({ images, name, icon, code }: ProductGall
         }}
       >
         {current ? (
-          <Image
+          <ProtectedImage
             key={current}
-            src={current}
+            src={productImage(current)}
             alt={name}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -82,8 +83,8 @@ export default function ProductGallery({ images, name, icon, code }: ProductGall
                   : "border-[#E8E2D5] opacity-70 hover:opacity-100"
               }`}
             >
-              <Image
-                src={img}
+              <ProtectedImage
+                src={thumbImage(img)}
                 alt={`${name} ${i + 1}`}
                 fill
                 sizes="96px"

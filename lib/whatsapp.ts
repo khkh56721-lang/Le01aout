@@ -7,6 +7,8 @@
 // card showing the product photo. The photo comes from the Open Graph tags in
 // app/[locale]/products/[slug]/page.tsx — the link and those tags are one feature.
 
+import { WATERMARK } from "./watermark";
+
 export const WHATSAPP_NUMBER = "22233322232";
 export const SITE_URL = "https://le01aout.com";
 
@@ -68,5 +70,8 @@ export function ogImageUrl(src: string): string {
   // Anything before the /v<version>/ segment is an existing delivery transform.
   const path = /^v\d+\//.test(rest) ? rest : rest.replace(/^[^/]+\//, "");
 
-  return `${head}${OG_TRANSFORM}/${path}`;
+  // The preview card is the single most re-shared image the business produces, so
+  // it carries the logo too. Marked AFTER the pad so the logo lands in the corner
+  // of the final square, not out on the white bars.
+  return `${head}${OG_TRANSFORM}/${WATERMARK}/${path}`;
 }

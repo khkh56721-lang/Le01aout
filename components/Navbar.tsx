@@ -19,6 +19,14 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // ON THE HOMEPAGE THE HEADER FLOATS OVER THE HERO.
+  // The hero is pulled up underneath it (see HeroHouseTour) so the house photo
+  // runs to the very top of the page. A solid cream bar sitting on top of that
+  // photo is exactly the "cut" Khaled kept pointing at — two surfaces that look
+  // like different pages. Transparent until you scroll, then it becomes the
+  // normal solid bar so the links stay readable over the rest of the page.
+  const overHero = pathname === "/" && !scrolled;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -53,7 +61,9 @@ export default function Navbar() {
       className={`sticky top-0 z-50 border-b transition-all duration-500 ${
         scrolled
           ? "bg-[#F5F1EA]/95 backdrop-blur-xl border-[#B8956A]/30 shadow-[0_4px_20px_rgba(42,38,32,0.08)]"
-          : "bg-[#F5F1EA] border-[#B8956A]/15"
+          : overHero
+            ? "bg-transparent border-transparent"
+            : "bg-[#F5F1EA] border-transparent"
       }`}
     >
       <div className="container mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">

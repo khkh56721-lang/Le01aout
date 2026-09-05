@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import ProtectedImage from "@/components/ProtectedImage";
 import ProductGallery from "@/components/ProductGallery";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { productWhatsAppMessage, whatsAppUrl } from "@/lib/whatsapp";
+import { thumbImage } from "@/lib/watermark";
 
 export interface VariantOption {
   code: string;
@@ -106,8 +107,8 @@ export default function ProductVariants({
                         : "border-[#E8E2D5] opacity-70 hover:opacity-100"
                     }`}
                   >
-                    <Image
-                      src={v.images[0]}
+                    <ProtectedImage
+                      src={thumbImage(v.images[0])}
                       alt={v.name}
                       fill
                       sizes="80px"

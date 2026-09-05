@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import ProtectedImage from "@/components/ProtectedImage";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { cardImage } from "@/lib/watermark";
 interface Product {
   id: string;
   name_ar: string;
@@ -52,8 +53,8 @@ export default function ProductCard({
         className="relative aspect-[4/3] bg-[#E8E2D5] overflow-hidden block"
       >
         {image ? (
-          <Image
-            src={image}
+          <ProtectedImage
+            src={cardImage(image)}
             alt={name}
             fill
             sizes={
@@ -71,8 +72,11 @@ export default function ProductCard({
           </div>
         )}
 
-        {/* Badges */}
-        <div className="absolute top-3 start-3 flex flex-col gap-1">
+        {/* Badges — pinned to the physical left, not the logical start: the
+            watermark is burned into the top-RIGHT of the photo, and in Arabic
+            (the default locale) `start` is the right, so the badge would land
+            on top of the logo. */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1">
           {product.in_stock !== false && (
             <span className="bg-[#5A7D4F] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
               {t("in_stock")}

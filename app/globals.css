@@ -20,7 +20,25 @@ body {
   background: var(--color-cream);
   color: var(--color-text);
   font-family: var(--font-sans);
-  overflow-x: hidden;
+}
+
+/*
+ * Sideways scroll is CLIPPED, not HIDDEN, and on both elements.
+ *
+ * `overflow-x: hidden` on body alone (what used to be here) makes body a scroll
+ * container while html keeps growing, so a stray wide element still widened the
+ * page: on a 390px phone the document measured 402px and EVERY section — navbar
+ * included — sat 11px off-centre, leaving a cream strip down the side of the
+ * hero that read as a broken seam under the header.
+ *
+ * `clip` does not create a scroll container, which matters here beyond tidiness:
+ * a scroll container on an ancestor breaks `position: sticky`, and the homepage
+ * hero is sticky. Never swap this back to `hidden`.
+ */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 /* Kill the grey tap flash on mobile, smooth out touch */
