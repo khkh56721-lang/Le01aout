@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 See the root `../CLAUDE.md` for full project context, data pipeline, and architecture overview.
 
+**Routes outside `app/[locale]/`:** `/fiche` (the evening client-card tablet form, noindex) and `/api/*` (`/api/fiche-client`, `/api/wa-facture`: Odoo + Twilio WhatsApp, secrets read at runtime as Worker secrets). `middleware.ts` excludes both from the locale redirect. Details: root `CLAUDE.md` → Architecture → « Evening client card » and « WhatsApp notifications ».
+
 ---
 
 ## Critical: Dev Server
@@ -52,7 +54,7 @@ Three fonts loaded in `app/[locale]/layout.tsx`:
 
 ## Homepage Sections
 
-`app/[locale]/page.tsx` renders: `Navbar → HeroHouseTour → AnimatedCategories → EditorialRows → FeaturedProductsSection → 3D Design Teaser → Testimonials → FAQ → VisitShowroom CTA → WhatsAppButton`
+`app/[locale]/page.tsx` renders: `Navbar → HeroHouseTour → AnimatedCategories → EditorialRows → FeaturedProductsSection → 3D Design Teaser → FAQ → VisitShowroom CTA → WhatsAppButton`
 
 **Navbar** (`components/Navbar.tsx`) — sticky; cream (`#F5F1EA`), turns solid + shadow when scrolled >40px. Animated framer-motion mobile menu (scroll-locked, closes on route change). Logo is `/public/logo.png` (white line-art on a **transparent** bg) — `invert`ed here so it reads as black on cream; the Footer leaves it white on the dark bg. Language switcher links to the current `pathname` in each other locale.
 
@@ -87,7 +89,7 @@ The old video hero (`components/HeroSection.tsx`) and `LuxuryScene.tsx` were del
 
 **3D Design Teaser** — inline in `page.tsx` (NOT a component), dark full-width band (`bg-[#1A1814]`) after Featured: image + text, links to `/design`. Wrapped in cream→dark and dark→cream gradient fade strips. RTL swaps image/text order (`lg:order-2`).
 
-**Testimonials** (`components/Testimonials.tsx`) — 5-star review cards with avatar initials + trust header, hover lift. ⚠️ Names are PLACEHOLDERS (Aïcha M. / Mohamed O. / Fatimetou B.) — replace with real reviews before launch.
+**Testimonials** (`components/Testimonials.tsx`) — **NOT rendered since 2026-09-27**: its three names (Aïcha M. / Mohamed O. / Fatimetou B.) were placeholders shown on the live site. The component is kept; put it back in `page.tsx` only with real client reviews and Khaled's OK.
 
 **FAQ** (`components/FAQ.tsx`) — 6 trilingual Q&As, animated accordion, premium card styling.
 

@@ -10,8 +10,8 @@
  * they cannot drift apart again.
  */
 export const SOCIAL = {
-  instagram: "https://www.instagram.com/le01_aout/",
-  tiktok: "https://www.tiktok.com/@le_01_aout_deco",
+  instagram: "https://www.instagram.com/le1_aout_deco/",
+  tiktok: "https://www.tiktok.com/@le1_aout_deco",
   snapchat: "https://www.snapchat.com/add/le01_aoutdeco",
   facebook: "https://www.facebook.com/profile.php?id=61578655620948",
 } as const;
@@ -28,6 +28,6 @@ export const SOCIAL_SAME_AS = [
  * back to the matching https URL above.
  */
 export const SOCIAL_APP = {
-  instagram: "instagram://user?username=le01_aout",
-  tiktok: "snssdk1128://user/profile/@le_01_aout_deco",
+  instagram: "instagram://user?username=le1_aout_deco",
+  tiktok: "snssdk1128://user/profile/@le1_aout_deco",
 } as const;

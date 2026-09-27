@@ -16,7 +16,11 @@ export default function Navbar() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  // The mobile menu belongs to the page it was opened on, so a route change closes it
+  // without a setState-in-effect.
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const menuOpen = menuPath === pathname;
+  const setMenuOpen = (open: boolean) => setMenuPath(open ? pathname : null);
   const [scrolled, setScrolled] = useState(false);
 
   // ON THE HOMEPAGE THE HEADER FLOATS OVER THE HERO.
@@ -32,11 +36,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Close the mobile menu whenever the route changes
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
 
   // Lock background scroll while the mobile menu is open
   useEffect(() => {

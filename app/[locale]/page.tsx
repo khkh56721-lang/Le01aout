@@ -6,8 +6,8 @@ import HeroHouseTour from "@/components/HeroHouseTour";
 import AnimatedCategories from "@/components/AnimatedCategories";
 import EditorialRows from "@/components/EditorialRows";
 import FeaturedProductsSection from "@/components/FeaturedProductsSection";
-import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import { Link } from "@/i18n/navigation";
 import products from "../../../data/products.json";
 import { getTourRooms } from "@/lib/houseTour";
 
@@ -101,13 +101,13 @@ export default async function HomePage() {
                   </li>
                 ))}
               </ul>
-              <a
+              <Link
                 href="/design"
                 className="inline-flex items-center justify-center gap-2 bg-[#B8956A] text-[#1A1814] font-bold py-4 px-8 hover:bg-white transition-all duration-300 text-sm"
               >
                 {designCta}
                 <span aria-hidden>{isAr ? "←" : "→"}</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -115,8 +115,8 @@ export default async function HomePage() {
       {/* Tall warm fade from the dark band back into cream */}
       <div className="h-24 sm:h-40 bg-gradient-to-b from-[#1A1814] via-[#6B6358] to-[#F5F1EA]" aria-hidden />
 
-      {/* ── TESTIMONIALS ────────────────────────────────────────────────── */}
-      <Testimonials />
+      {/* Testimonials removed 2026-09-27: its three names were placeholders. Put it back only
+          with real client reviews (components/Testimonials.tsx is kept for that). */}
 
       {/* ── FAQ ─────────────────────────────────────────────────────────── */}
       <FAQ />
@@ -149,12 +149,12 @@ export default async function HomePage() {
             >
               {whatsappLabel}
             </a>
-            <a
+            <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 border border-[#B8956A] text-[#2A2620] font-semibold px-8 py-3.5 rounded-full hover:bg-[#B8956A] hover:text-white transition-all text-sm"
             >
               {contactLabel}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // OpenNext / Wrangler build output and a gitignored skill folder — not site source.
+    ".open-next/**",
+    ".wrangler/**",
+    "build-premium-website/**",
   ]),
 ]);
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 
 interface Category {
@@ -19,7 +19,6 @@ export default function CategoryFilter({
   active?: string;
 }) {
   const locale = useLocale();
-  const t = useTranslations("categories");
   const router = useRouter();
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);

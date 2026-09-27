@@ -13,9 +13,10 @@ import type { SyntheticEvent } from "react";
 
 const block = (e: SyntheticEvent) => e.preventDefault();
 
-export default function ProtectedImage({ className = "", ...props }: ImageProps) {
+export default function ProtectedImage({ className = "", alt, ...props }: ImageProps) {
   return (
     <Image
+      alt={alt}
       {...props}
       draggable={false}
       onContextMenu={block}
