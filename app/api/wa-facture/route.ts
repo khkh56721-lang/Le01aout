@@ -5,6 +5,8 @@
 // Basic auth, so the shared secret travels as ?key=WA_HOOK_KEY. The payload is only trusted for
 // `_id`: the invoice itself is re-read from Odoo before anything is sent.
 // Secrets: WA_HOOK_KEY, TWILIO_CT_FACTURE + the Odoo/Twilio ones already used by /api/fiche-client.
+// TWILIO_CT_FACTURE_PDF (odoo/twilio_templates_pdf.py, set once Meta approves it) sends the invoice
+// PDF as a WhatsApp document; its {{4}} is the path after the Odoo domain. Unset = the link template.
 import { env, json, ltr, odoo, sendTemplate } from "@/lib/notify";
 
 type Move = {
@@ -53,9 +55,12 @@ export async function POST(req: Request) {
   if (m.invoice_date && m.invoice_date < limit) return json({ ok: true, skipped: "backdated" });
   if (!m.access_token) return json({ error: "no_token" }, 409);
 
-  const pdf = `${e.ODOO_URL}/my/invoices/${m.id}?access_token=${m.access_token}&report_type=pdf&download=true`;
+  const path = `my/invoices/${m.id}?access_token=${m.access_token}&report_type=pdf&download=true`;
   const client = (m.partner_id ? m.partner_id[1] : "") || "—";
-  const wa = await sendTemplate(e, e.TWILIO_CT_FACTURE, { 1: ltr(m.name), 2: client, 3: ltr(mru(m.amount_total)), 4: pdf });
+  const vars = { 1: ltr(m.name), 2: client, 3: ltr(mru(m.amount_total)) };
+  const wa = e.TWILIO_CT_FACTURE_PDF
+    ? await sendTemplate(e, e.TWILIO_CT_FACTURE_PDF, { ...vars, 4: path })
+    : await sendTemplate(e, e.TWILIO_CT_FACTURE, { ...vars, 4: `${e.ODOO_URL}/${path}` });
 
   try {
     await odoo(e, "account.move", "message_post", [[m.id]], {
