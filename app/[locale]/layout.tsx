@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { SOCIAL_SAME_AS } from "@/lib/social";
+import { GEO, MAPS_URL, PLUS_CODE } from "@/lib/location";
 import { Cairo, Cormorant_Garamond, Manrope } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -47,6 +48,8 @@ const jsonLd = {
   "@type": "FurnitureStore",
   "@id": "https://le01aout.com/#business",
   name: "Le Premier Aout Decor",
+  alternateName: ["Le 1er Août Déco", "Le 01 aout", "Le 1er Août"],
+  legalName: "1ER AOUT SARL",
   description:
     "Showroom de meubles et décoration de luxe à Nouakchott. Salons, chambres, salle à manger — pièces uniques sur commande.",
   url: "https://le01aout.com",
@@ -56,11 +59,24 @@ const jsonLd = {
   email: "contact@le01aout.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "طريق صكوك",
+    streetAddress: `Route Sukuk (طريق صكوك), ${PLUS_CODE}`,
     addressLocality: "Nouakchott",
     addressCountry: "MR",
   },
-  sameAs: SOCIAL_SAME_AS,
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: GEO.latitude,
+    longitude: GEO.longitude,
+  },
+  hasMap: MAPS_URL,
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "09:00",
+    closes: "23:00",
+  },
+  areaServed: { "@type": "Country", name: "Mauritania" },
+  sameAs: [...SOCIAL_SAME_AS, MAPS_URL],
 };
 
 export default async function LocaleLayout({

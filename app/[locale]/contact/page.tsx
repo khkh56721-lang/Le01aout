@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { SOCIAL, SOCIAL_APP } from "@/lib/social";
+import { MAPS_EMBED, MAPS_URL } from "@/lib/location";
 import SocialLink from "@/components/SocialLink";
 import Navbar from "@/components/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -12,8 +13,8 @@ export default async function ContactPage() {
   const EMAIL = "contact@le01aout.com";
   const waMessage = "مرحبا، أريد الاستفسار";
   const waUrl = `https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(waMessage)}`;
-  const mapsUrl = `https://www.google.com/maps?cid=18308411846868116313`;
-  const mapsEmbed = `https://www.google.com/maps?cid=18308411846868116313&output=embed`;
+  const mapsUrl = MAPS_URL;
+  const mapsEmbed = MAPS_EMBED;
 
   const cards = [
     {

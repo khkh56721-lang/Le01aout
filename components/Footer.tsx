@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { SOCIAL, SOCIAL_APP } from "@/lib/social";
+import { MAPS_URL } from "@/lib/location";
 import SocialLink from "@/components/SocialLink";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
@@ -20,6 +21,7 @@ export default function Footer() {
       about: "من نحن",
       contact_us: "اتصل بنا",
       address: "طريق صكوك",
+      maps: "الموقع على خرائط Google",
       rights: "جميع الحقوق محفوظة."
     },
     fr: {
@@ -32,6 +34,7 @@ export default function Footer() {
       about: "À propos",
       contact_us: "Contact",
       address: "Route Sukuk",
+      maps: "Voir sur Google Maps",
       rights: "Tous droits réservés."
     },
     en: {
@@ -44,6 +47,7 @@ export default function Footer() {
       about: "About",
       contact_us: "Contact",
       address: "Route Sukuk",
+      maps: "View on Google Maps",
       rights: "All rights reserved."
     }
   };
@@ -103,7 +107,10 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>{t.address}<br/>{locale === "ar" ? "نواكشوط، موريتانيا" : locale === "fr" ? "Nouakchott, Mauritanie" : "Nouakchott, Mauritania"}</span>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#B8956A] transition-colors">
+                  {t.address}<br/>{locale === "ar" ? "نواكشوط، موريتانيا" : locale === "fr" ? "Nouakchott, Mauritanie" : "Nouakchott, Mauritania"}
+                  <br/><span className="text-[#B8956A] text-xs">{t.maps} →</span>
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <svg className="w-5 h-5 text-[#B8956A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">

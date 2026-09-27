@@ -20,7 +20,7 @@ npm run build              # Full production build — run before deploying
 
 @AGENTS.md
 
-- `middleware.ts` → `proxy.ts`, export named `proxy` (not default export)
+- ⚠️ **`middleware.ts` → `proxy.ts` is the Next.js 16 rename, and THIS PROJECT DELIBERATELY DOES NOT DO IT.** There is no `proxy.ts`; `middleware.ts` exists and exports `export function middleware`. `proxy` is locked to the Node runtime while Cloudflare Workers needs edge, so renaming it breaks the deploy. The reasoning is commented at the top of the file. **Do not "modernise" this** — verified again 2026-09-05 (`ls proxy.ts` → No such file).
 - Tailwind v4: `@import "tailwindcss"` + `@theme {}` in CSS — no `tailwind.config.ts`
 - Async Server Components: `getTranslations()` from `next-intl/server`, not `useTranslations()`
 - Layout params are a `Promise`: `const { locale } = await params`
@@ -75,11 +75,11 @@ Three fonts loaded in `app/[locale]/layout.tsx`:
 - ⚠️ `<html dir>` is already set per locale, so **flex reverses on its own in Arabic** — never add `flex-row-reverse` on top. Use `ps-*`/`pe-*`/`text-start`.
 - The hero images are served **without** the `lib/watermark.ts` mark, on purpose.
 
-`components/HeroSection.tsx` (the old video hero) and `LuxuryScene.tsx` are both unused — do not re-import either.
+The old video hero (`components/HeroSection.tsx`) and `LuxuryScene.tsx` were deleted on 2026-09-10 — they had zero references.
 
 **AnimatedCategories** — 5 category cards, cream section bg, taupe card gradients. Links to `/products?category={id}`.
 
-**EditorialRows** — two alternating full-width image+text rows, cream bg. **No watermark** (Khaled, 2026-09-03: the logo on these lifestyle shots looked wrong). Same for the **AnimatedCategories** tiles. `ProductCard`, `ProductGallery` and `ProductVariants` DO keep their marks — real product photos are what the watermark is for. Second row (`chambre`) uses `/public/homepage.png`. First row (`salon`) still shows gradient placeholder until a photo is added via `row.imageUrl`.
+**EditorialRows** — two alternating full-width image+text rows, cream bg. **No watermark** (Khaled, 2026-09-03: the logo on these lifestyle shots looked wrong). Same for the **AnimatedCategories** tiles. `ProductCard`, `ProductGallery` and `ProductVariants` DO keep their marks — real product photos are what the watermark is for. **Both rows now carry real Cloudinary roomsets** — salon = `PR_34/salon_set_grey_leather_roomset.jpg`, chambre = `PR_5/full_bedroom_wardrobe_a.png` (verified 2026-09-05). The old claims that the salon showed a gradient placeholder and that the chambre used `/public/homepage.png` are both **false**; `public/homepage.png` was referenced by nothing and was deleted on 2026-09-10.
 
 **FeaturedProductsSection** — cream section bg (`bg-[#F5F1EA]`), horizontal snap carousel (`overflow-x-auto snap-x`), `useRef` + `scrollBy` for prev/next arrows. Each `ProductCard` is `snap-start flex-none w-72 sm:w-80`.
 
