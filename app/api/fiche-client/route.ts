@@ -6,9 +6,11 @@
 // Secrets (wrangler secret put): FICHE_PIN, ODOO_URL, ODOO_DB, ODOO_UID, ODOO_API_KEY,
 // TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WA_FROM, TWILIO_CT_VISITE, TWILIO_CT_ACHAT,
 // WA_NOTIFY_TO (comma-separated). Missing Twilio config = no WhatsApp; the form still saves.
+// The reception phone (WA_RECEPTION_TO) also gets a to-do: TWILIO_CT_RECEPTION for a purchase,
+// TWILIO_CT_RECEPTION_VISITE for a visit (odoo/twilio_template_reception.py). Unset = nothing sent.
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { FICHE_SOURCES, FICHE_SOURCE_IDS } from "@/lib/ficheSources";
-import { ltr } from "@/lib/notify";
+import { ltr, sendTemplate } from "@/lib/notify";
 
 const TAG = "Fiche du soir — à vérifier";
 
@@ -156,7 +158,18 @@ export async function POST(req: Request) {
       // the contact is saved; a missing chatter line is not worth failing the form
     }
     const wa = await notifyWhatsApp(e, { name, phone: phone.display, source, bought, product, note });
-    return json({ ok: true, existing, wa });
+    // Reception phone (Roughaye): every card becomes a to-do. Purchase = quote in Odoo, then the invoice
+    // to the client from the shop's WhatsApp; visit = thank-you + follow-up from the shop's WhatsApp.
+    // French templates, number left unwrapped so it stays tappable.
+    const waReception = bought
+      ? await sendTemplate(e, e.TWILIO_CT_RECEPTION, { 1: name, 2: phone.display, 3: product }, e.WA_RECEPTION_TO)
+      : await sendTemplate(
+          e,
+          e.TWILIO_CT_RECEPTION_VISITE,
+          { 1: name, 2: phone.display, 3: note || "—", 4: existing ? "déjà dans Odoo" : "nouveau contact" },
+          e.WA_RECEPTION_TO,
+        );
+    return json({ ok: true, existing, wa: wa + waReception });
   } catch {
     return json({ error: "odoo" }, 502);
   }

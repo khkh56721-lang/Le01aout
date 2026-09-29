@@ -239,7 +239,11 @@ export default function FicheClientForm() {
 
           <div>
             <label htmlFor="note" className={label}>
-              <Bi fr="Remarque (facultatif)" ar="ملاحظة (اختياري)" />
+              {bought === false ? (
+                <Bi fr="Qu'est-ce qui l'intéressait ? (facultatif)" ar="ما الذي أعجبه؟ (اختياري)" />
+              ) : (
+                <Bi fr="Remarque (facultatif)" ar="ملاحظة (اختياري)" />
+              )}
             </label>
             <input id="note" value={note} onChange={(e) => setNote(e.target.value)} autoComplete="off" className={field} />
           </div>

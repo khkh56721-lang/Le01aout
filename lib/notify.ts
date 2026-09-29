@@ -1,5 +1,6 @@
 // Server-only helpers shared by the API routes: worker secrets, Odoo JSON-RPC, and the
-// Twilio WhatsApp template sender (to Khaled + his mother only — never clients).
+// Twilio WhatsApp template sender (to Khaled + his mother, and the shop's reception phone for
+// purchase to-dos — never clients).
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export type Env = Record<string, string | undefined>;
@@ -45,10 +46,15 @@ export function ltr(s: string) {
   return `⁦‎${s}⁩`;
 }
 
-// Sends one approved Twilio Content template to every number in WA_NOTIFY_TO.
+// Sends one approved Twilio Content template to every number in `recipients` (default WA_NOTIFY_TO).
 // Returns how many Twilio accepted. Template variables may not be empty.
-export async function sendTemplate(e: Env, contentSid: string | undefined, vars: Record<number, string>): Promise<number> {
-  const to = (e.WA_NOTIFY_TO ?? "").split(",").map((t) => t.trim()).filter(Boolean);
+export async function sendTemplate(
+  e: Env,
+  contentSid: string | undefined,
+  vars: Record<number, string>,
+  recipients = e.WA_NOTIFY_TO,
+): Promise<number> {
+  const to = (recipients ?? "").split(",").map((t) => t.trim()).filter(Boolean);
   if (!e.TWILIO_ACCOUNT_SID || !e.TWILIO_AUTH_TOKEN || !e.TWILIO_WA_FROM || !contentSid || !to.length) return 0;
   const auth = "Basic " + btoa(`${e.TWILIO_ACCOUNT_SID}:${e.TWILIO_AUTH_TOKEN}`);
   const sent = await Promise.all(
