@@ -8,5 +8,8 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  }
+  },
+  // Workers Logs: /api/fiche-client and /api/wa-facture log each card / send (dashboard → Workers → le01aout → Logs).
+  // redact_query_string keeps WA_HOOK_KEY (/api/wa-facture?key=…) out of the logs; any deploy without it resets it to false.
+  "observability": { "enabled": true, "redact_query_string": true }
 }

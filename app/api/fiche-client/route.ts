@@ -31,6 +31,12 @@ function json(body: unknown, status = 200) {
   });
 }
 
+// Every refused card leaves a line in Workers Logs (never the client's name or phone).
+function fail(error: string, status: number) {
+  console.warn(`fiche-client refused: ${error} (${status})`);
+  return json({ error }, status);
+}
+
 // 8 local digits → "+222 XX XX XX XX"; accepts 222/00222/+222 prefixes.
 function normalizePhone(raw: string): { display: string; e164: string } | null {
   let d = raw.replace(/\D/g, "");
@@ -86,8 +92,10 @@ async function notifyWhatsApp(
           }),
           signal: AbortSignal.timeout(8000),
         });
+        if (!res.ok) console.error(`twilio refused: ${res.status} ${((await res.json().catch(() => ({}))) as { code?: number }).code ?? ""}`);
         return res.ok;
       } catch {
+        console.error("twilio: no response");
         return false;
       }
     }),
@@ -97,15 +105,15 @@ async function notifyWhatsApp(
 
 export async function POST(req: Request) {
   const e = env();
-  if (!e.FICHE_PIN || !e.ODOO_URL || !e.ODOO_API_KEY) return json({ error: "config" }, 500);
+  if (!e.FICHE_PIN || !e.ODOO_URL || !e.ODOO_API_KEY) return fail("config", 500);
 
   let b: Record<string, unknown>;
   try {
     b = await req.json();
   } catch {
-    return json({ error: "bad_request" }, 400);
+    return fail("bad_request", 400);
   }
-  if (String(b.pin ?? "") !== e.FICHE_PIN) return json({ error: "pin" }, 401);
+  if (String(b.pin ?? "") !== e.FICHE_PIN) return fail("pin", 401);
 
   const name = String(b.name ?? "").trim().replace(/\s+/g, " ").slice(0, 80);
   const phone = normalizePhone(String(b.phone ?? ""));
@@ -114,12 +122,12 @@ export async function POST(req: Request) {
   const source = Number(b.source);
   const bought = b.bought === true;
   const product = bought ? String(b.product ?? "").trim().replace(/\s+/g, " ").slice(0, 150) : "";
-  if (name.length < 2) return json({ error: "name" }, 400);
-  if (!phone) return json({ error: "phone" }, 400);
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "email" }, 400);
-  if (!FICHE_SOURCE_IDS.includes(source)) return json({ error: "source" }, 400);
-  if (typeof b.bought !== "boolean") return json({ error: "bought" }, 400);
-  if (bought && product.length < 2) return json({ error: "product" }, 400);
+  if (name.length < 2) return fail("name", 400);
+  if (!phone) return fail("phone", 400);
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("email", 400);
+  if (!FICHE_SOURCE_IDS.includes(source)) return fail("source", 400);
+  if (typeof b.bought !== "boolean") return fail("bought", 400);
+  if (bought && product.length < 2) return fail("product", 400);
 
   try {
     const tags = (await odoo(e, "res.partner.category", "search", [[["name", "=", TAG]]], { limit: 1 })) as number[];
@@ -154,8 +162,9 @@ export async function POST(req: Request) {
     ].filter(Boolean);
     try {
       await odoo(e, "res.partner", "message_post", [[id]], { body: lines.join(" · "), message_type: "comment", subtype_xmlid: "mail.mt_note" });
-    } catch {
+    } catch (err) {
       // the contact is saved; a missing chatter line is not worth failing the form
+      console.error(`fiche-client chatter note failed on partner #${id}:`, err instanceof Error ? err.message : err);
     }
     const wa = await notifyWhatsApp(e, { name, phone: phone.display, source, bought, product, note });
     // Reception phone (Roughaye): every card becomes a to-do. Purchase = quote in Odoo, then the invoice
@@ -169,8 +178,12 @@ export async function POST(req: Request) {
           { 1: name, 2: phone.display, 3: note || "—", 4: existing ? "déjà dans Odoo" : "nouveau contact" },
           e.WA_RECEPTION_TO,
         );
+    console.log(
+      `fiche-client saved: partner #${id} ${existing ? "existing" : "new"} · ${bought ? "purchase" : "visit"} · WhatsApp accepted: notify ${wa}, reception ${waReception}`,
+    );
     return json({ ok: true, existing, wa: wa + waReception });
-  } catch {
-    return json({ error: "odoo" }, 502);
+  } catch (err) {
+    console.error("fiche-client odoo error:", err instanceof Error ? err.message : err);
+    return fail("odoo", 502);
   }
 }

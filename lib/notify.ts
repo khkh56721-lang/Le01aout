@@ -71,8 +71,10 @@ export async function sendTemplate(
           }),
           signal: AbortSignal.timeout(8000),
         });
+        if (!res.ok) console.error(`twilio refused: ${res.status} ${((await res.json().catch(() => ({}))) as { code?: number }).code ?? ""}`);
         return res.ok;
       } catch {
+        console.error("twilio: no response");
         return false;
       }
     }),
