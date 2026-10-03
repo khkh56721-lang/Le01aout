@@ -13,7 +13,7 @@ export const SOCIAL = {
   instagram: "https://www.instagram.com/le1_aout_deco/",
   tiktok: "https://www.tiktok.com/@le1_aout_deco",
   snapchat: "https://www.snapchat.com/add/le01_aoutdeco",
-  facebook: "https://www.facebook.com/profile.php?id=61578655620948",
+  facebook: "https://www.facebook.com/profile.php?id=61595253892749",
 } as const;
 
 export const SOCIAL_SAME_AS = [
