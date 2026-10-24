@@ -52,21 +52,6 @@
   "food_service": "Service de table",
   "couvre_lits": "Couvre-lits"
  },
- "about": {
-  "title": "Notre histoire",
-  "intro": "Depuis plus de 5 ans, Le Premier Aout Decor habille les plus belles maisons de Nouakchott.",
-  "story_title": "L'héritage d'un savoir-faire",
-  "story_text": "Fondée sur une passion pour la décoration d'intérieur et l'artisanat de qualité, Le Premier Aout Decor est devenue une référence du mobilier haut de gamme en Mauritanie. Chaque pièce de notre catalogue — du salon Shiba à la chambre Prada — est sélectionnée pour son élégance, sa durabilité, et sa capacité à transformer un espace en véritable expérience.",
-  "values_title": "Nos valeurs",
-  "value1_title": "Qualité sans compromis",
-  "value1_text": "Des matériaux nobles, des finitions soignées, et une attention au détail dans chaque produit.",
-  "value2_title": "Service personnalisé",
-  "value2_text": "Conseils sur mesure, livraison à domicile, et accompagnement post-achat — par WhatsApp, à tout moment.",
-  "value3_title": "Fabrication sur commande",
-  "value3_text": "Certaines pièces peuvent être adaptées à vos dimensions et préférences — dites-le-nous.",
-  "cta_title": "Une idée de projet ?",
-  "cta_text": "Envoyez-nous un message WhatsApp — nous vous répondons dans la journée."
- },
  "contact": {
   "title": "Contactez-nous",
   "subtitle": "Nous sommes à votre écoute — WhatsApp, téléphone, ou en boutique.",
