@@ -34,6 +34,7 @@ export default function ProductCard({
 }) {
   const locale = useLocale();
   const t = useTranslations("product");
+  const family = useTranslations("categories");
   const name =
     locale === "ar"
       ? product.name_ar
@@ -87,13 +88,19 @@ export default function ProductCard({
 
       {/* Content */}
       <div className={`${compact ? "p-3 sm:p-5" : "p-5"} flex flex-col flex-1`}>
-        <p className="text-[10px] text-[#6B6358] uppercase tracking-widest mb-1 font-mono">
-          {product.category.replace("_", " ")}
+        <p className="text-[10px] rtl:text-xs text-[#6B6358] uppercase tracking-widest rtl:tracking-normal mb-1 font-mono rtl:font-sans">
+          {family(product.category)}
         </p>
         <Link href={`/products/${product.id}`}>
           <h3
             className={`text-[#2A2620] ${compact ? "text-sm sm:text-lg mb-2 sm:mb-3" : "text-lg mb-3"} leading-snug line-clamp-2 hover:text-[#B8956A] transition-colors`}
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 400, fontStyle: "italic" }}
+            // Arabic has no italics: the browser slants it and line-clamp cuts the slant
+            // off at the edge, taking the first letter of each line with it.
+            style={
+              locale === "ar"
+                ? { fontFamily: "var(--font-cairo), sans-serif", fontWeight: 500 }
+                : { fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 400, fontStyle: "italic" }
+            }
           >
             {name}
           </h3>
@@ -102,7 +109,7 @@ export default function ProductCard({
         {/* Text-link CTA with animated gold line */}
         <Link
           href={`/products/${product.id}`}
-          className="mt-auto flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase font-mono text-[#6B6358] hover:text-[#B8956A] transition-colors duration-300 group/link pt-3 border-t border-[#E8E2D5]"
+          className="mt-auto flex items-center gap-3 text-[10px] rtl:text-xs tracking-[0.4em] rtl:tracking-normal uppercase font-mono rtl:font-sans text-[#6B6358] hover:text-[#B8956A] transition-colors duration-300 group/link pt-3 border-t border-[#E8E2D5]"
         >
           <span className="w-5 h-px bg-[#B8956A] transition-all duration-300 group-hover/link:w-8" />
           {locale === "ar" ? "اكتشف" : locale === "fr" ? "Découvrir" : "Discover"}

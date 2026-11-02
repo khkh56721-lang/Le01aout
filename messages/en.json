@@ -29,7 +29,14 @@
   "category": "Category",
   "code": "Product code",
   "related": "You might also like",
-  "not_found": "Product not found"
+  "not_found": "Product not found",
+  "search_placeholder": "Search a product or a code",
+  "search_button": "Search",
+  "search_results": "{count, plural, one {# result} other {# results}} for “{query}”",
+  "search_none": "Nothing found for “{query}”",
+  "search_none_hint": "Send us a photo or a description on WhatsApp and our team will help you.",
+  "search_ask": "Ask on WhatsApp",
+  "search_clear": "See all products"
  },
  "categories": {
   "salon": "Living Room",
@@ -50,7 +57,9 @@
   "meuble_tv": "TV Stands",
   "vase": "Vases",
   "food_service": "Tableware",
-  "couvre_lits": "Bedspreads"
+  "couvre_lits": "Bedspreads",
+  "tapis": "Rugs",
+  "materiaux_finitions": "Materials & Finishes"
  },
  "contact": {
   "title": "Contact us",

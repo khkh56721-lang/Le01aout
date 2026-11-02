@@ -29,7 +29,14 @@
   "category": "Catégorie",
   "code": "Code produit",
   "related": "Vous pourriez aimer",
-  "not_found": "Produit introuvable"
+  "not_found": "Produit introuvable",
+  "search_placeholder": "Chercher un produit ou un code",
+  "search_button": "Chercher",
+  "search_results": "{count, plural, one {# résultat} other {# résultats}} pour « {query} »",
+  "search_none": "Rien trouvé pour « {query} »",
+  "search_none_hint": "Envoyez-nous une photo ou une description sur WhatsApp, notre équipe vous aidera.",
+  "search_ask": "Demander sur WhatsApp",
+  "search_clear": "Voir tous les produits"
  },
  "categories": {
   "salon": "Salon",
@@ -50,7 +57,9 @@
   "meuble_tv": "Meuble TV",
   "vase": "Vases",
   "food_service": "Service de table",
-  "couvre_lits": "Couvre-lits"
+  "couvre_lits": "Couvre-lits",
+  "tapis": "Tapis",
+  "materiaux_finitions": "Matériaux & Finitions"
  },
  "contact": {
   "title": "Contactez-nous",

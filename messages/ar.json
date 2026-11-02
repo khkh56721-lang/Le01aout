@@ -29,7 +29,14 @@
   "category": "الفئة",
   "code": "كود المنتج",
   "related": "قد يعجبك أيضاً",
-  "not_found": "المنتج غير موجود"
+  "not_found": "المنتج غير موجود",
+  "search_placeholder": "ابحث باسم المنتج أو برمزه",
+  "search_button": "بحث",
+  "search_results": "{count} نتيجة لـ « {query} »",
+  "search_none": "لم نجد « {query} »",
+  "search_none_hint": "أرسل لنا صورة أو وصف ما تبحث عنه عبر واتساب وسيساعدك فريقنا.",
+  "search_ask": "اسأل عبر واتساب",
+  "search_clear": "عرض كل المنتجات"
  },
  "categories": {
   "salon": "صالون",
@@ -50,7 +57,9 @@
   "meuble_tv": "طاولات تلفاز",
   "vase": "مزهريات",
   "food_service": "خدمة المائدة",
-  "couvre_lits": "مفارش السرير"
+  "couvre_lits": "مفارش السرير",
+  "tapis": "سجاد",
+  "materiaux_finitions": "مواد وتشطيبات"
  },
  "contact": {
   "title": "تواصل معنا",
