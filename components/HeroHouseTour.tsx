@@ -427,7 +427,7 @@ export default function HeroHouseTour({ rooms }: { rooms: TourRoom[] }) {
           isRtl ? "right-0 text-right" : "left-0 text-left"
         }`}
       >
-        <p className="text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-[#9A7644] sm:text-[#B8956A] mb-2 font-mono">
+        <p className="text-[10px] sm:text-[11px] rtl:text-xs tracking-[0.32em] uppercase text-[#7A5C30] sm:text-[#9A7644] mb-2 font-mono rtl:font-sans [text-shadow:0_0_8px_rgba(255,255,255,0.9)]">
           {pick(locale, "بيت واحد · كل قطعة من متجرنا", "Une maison · chaque pièce est à nous", "One home · every piece is ours")}
         </p>
 
@@ -479,6 +479,7 @@ export default function HeroHouseTour({ rooms }: { rooms: TourRoom[] }) {
                 : pick(locale, `تصفّح ${room.label_ar}`, `Voir ${room.label_fr.toLowerCase()}`, `Browse ${room.label_en.toLowerCase()}`)}
           </Link>
           <a
+            data-wa-cta
             href={whatsAppUrl(
               product
                 ? productWhatsAppMessage({

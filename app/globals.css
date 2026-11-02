@@ -23,6 +23,32 @@ body {
 }
 
 /*
+ * Arabic pages are Cairo throughout. Manrope's next/font stack ends in a local
+ * Arial, which has Arabic glyphs, so Cairo never got a turn behind it: until
+ * 2026-11-03 Arabic rendered in Arial, Courier New and Times. Re-pointing the
+ * variables covers `font-sans`, `font-mono` and every inline Cormorant heading.
+ * Slants and letter-spacing are Latin ideas: on Arabic the browser fakes the
+ * slant and pulls joined letters apart. These rules are unlayered, so they beat
+ * Tailwind's utilities; inline styles need !important.
+ */
+html[dir="rtl"] {
+  --font-sans: var(--font-cairo), sans-serif;
+  --font-mono: var(--font-cairo), sans-serif;
+  --font-serif: var(--font-cairo), sans-serif;
+  --font-cormorant: var(--font-cairo), sans-serif;
+}
+
+html[dir="rtl"] [class*="tracking-"],
+html[dir="rtl"] [style*="letter-spacing"] {
+  letter-spacing: normal !important;
+}
+
+html[dir="rtl"] .italic,
+html[dir="rtl"] [style*="italic"] {
+  font-style: normal !important;
+}
+
+/*
  * Sideways scroll is CLIPPED, not HIDDEN, and on both elements.
  *
  * `overflow-x: hidden` on body alone (what used to be here) makes body a scroll

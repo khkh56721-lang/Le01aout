@@ -27,6 +27,22 @@ const FAQS: QA[] = [
     a_en: "Payment is arranged directly with our team via WhatsApp or during your showroom visit. There is no online payment on the site.",
   },
   {
+    q_ar: "متى أدفع؟",
+    q_fr: "Quand dois-je payer ?",
+    q_en: "When do I pay?",
+    a_ar: "الأثاث والديكور: دفع المبلغ كاملاً قبل التسليم. التصنيع حسب الطلب والتجهيز: دفعة مقدّمة قدرها 50% عند الطلب، والباقي عند التسليم أو عند انتهاء الأشغال. بعد بدء التصنيع لا تُستردّ الدفعة المقدّمة.",
+    a_fr: "Mobilier et décoration : paiement de 100 % avant la livraison. Fabrication sur mesure et agencement : acompte de 50 % à la commande, le reste à la livraison ou à la fin des travaux. Une fois la fabrication lancée, l'acompte n'est pas remboursable.",
+    a_en: "Furniture and décor: 100% before delivery. Made-to-measure work and fit-out: a 50% deposit when you order, the rest at delivery or when the work is finished. Once production has started, the deposit is not refundable.",
+  },
+  {
+    q_ar: "هل يمكن إرجاع منتج؟",
+    q_fr: "Puis-je retourner un produit ?",
+    q_en: "Can I return a product?",
+    a_ar: "بعد تسليم البضاعة والتحقق منها يصبح البيع نهائياً. أما إذا وصل المنتج تالفاً، أو لم يكن هو المنتج المطلوب، فنستعيده ونستبدله دون أي تكلفة، وإذا تعذّر الاستبدال نردّ ثمنه. أبلغنا بذلك عند الاستلام أو خلال 48 ساعة على الأكثر، مع صور، عبر واتساب.",
+    a_fr: "Une fois la marchandise livrée et vérifiée, la vente est ferme. Si le produit arrive abîmé, ou s'il n'est pas celui commandé, nous le reprenons et le remplaçons sans frais ; si le remplacement est impossible, nous le remboursons. Signalez-le à la livraison ou au plus tard sous 48 heures, avec des photos, par WhatsApp.",
+    a_en: "Once the goods are delivered and checked, the sale is final. If a product arrives damaged, or isn't the one you ordered, we take it back and replace it free of charge; if a replacement isn't possible, we refund it. Tell us at delivery or within 48 hours at the latest, with photos, on WhatsApp.",
+  },
+  {
     q_ar: "هل توصلون داخل نواكشوط؟",
     q_fr: "Livrez-vous à Nouakchott ?",
     q_en: "Do you deliver within Nouakchott?",

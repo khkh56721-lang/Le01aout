@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { generalWhatsAppMessage, whatsAppUrl } from "@/lib/whatsapp";
 
 export default function WhatsAppButton({
@@ -13,13 +14,36 @@ export default function WhatsAppButton({
 }) {
   const url = whatsAppUrl(message ?? generalWhatsAppMessage(locale));
 
+  // Steps aside while the page's own WhatsApp button ([data-wa-cta]) is on
+  // screen: same action twice, and on a phone it lands right on top of it.
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-wa-cta]");
+    if (!targets.length) return;
+    const onScreen = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) onScreen.add(entry.target);
+        else onScreen.delete(entry.target);
+      }
+      setHidden(onScreen.size > 0);
+    });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group fixed bottom-5 end-5 sm:bottom-6 sm:end-6 z-40 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:scale-110 active:scale-95 transition-transform duration-300"
+      className={`group fixed bottom-5 end-5 sm:bottom-6 sm:end-6 z-40 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:scale-110 active:scale-95 transition-[transform,opacity] duration-300 ${
+        hidden ? "opacity-0 pointer-events-none" : ""
+      }`}
       aria-label="WhatsApp"
+      aria-hidden={hidden}
+      tabIndex={hidden ? -1 : undefined}
     >
       {/* Pulsing ring */}
       <span className="absolute inset-0 rounded-full bg-[#25D366] animate-wa-pulse pointer-events-none" aria-hidden="true" />

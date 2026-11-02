@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 
@@ -23,8 +23,11 @@ export default function CategoryFilter({
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLButtonElement>(null);
+  // A phone shows 3 chips of 21 and nothing says there are more.
+  const [showAll, setShowAll] = useState(false);
 
   const select = (id: string) => {
+    setShowAll(false);
     router.push(id === "all" ? pathname : `${pathname}?category=${id}`);
   };
 
@@ -80,7 +83,7 @@ export default function CategoryFilter({
       {/* One horizontal row instead of 21 chips wrapping down the page. */}
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto snap-x pb-1"
+        className={`flex gap-3 pb-1 ${showAll ? "flex-wrap" : "overflow-x-auto snap-x"}`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {allCategories.map((cat) => {
@@ -107,6 +110,25 @@ export default function CategoryFilter({
           );
         })}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setShowAll((open) => !open)}
+        aria-expanded={showAll}
+        className="lg:hidden mt-2 py-1 text-sm font-semibold text-[#9A7644]"
+      >
+        {showAll
+          ? locale === "ar"
+            ? "عرض أقل ▴"
+            : locale === "en"
+              ? "Show less ▴"
+              : "Réduire ▴"
+          : locale === "ar"
+            ? `كل الفئات (${categories.length}) ▾`
+            : locale === "en"
+              ? `See all ${categories.length} families ▾`
+              : `Voir les ${categories.length} familles ▾`}
+      </button>
     </div>
   );
 }

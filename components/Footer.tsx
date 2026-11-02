@@ -20,6 +20,7 @@ export default function Footer() {
       products: "المنتجات",
       about: "من نحن",
       contact_us: "اتصل بنا",
+      terms: "شروط البيع",
       address: "طريق صكوك",
       maps: "الموقع على خرائط Google",
       rights: "جميع الحقوق محفوظة."
@@ -33,6 +34,7 @@ export default function Footer() {
       products: "Produits",
       about: "À propos",
       contact_us: "Contact",
+      terms: "Conditions de vente",
       address: "Route Sukuk",
       maps: "Voir sur Google Maps",
       rights: "Tous droits réservés."
@@ -46,6 +48,7 @@ export default function Footer() {
       products: "Products",
       about: "About",
       contact_us: "Contact",
+      terms: "Terms of sale",
       address: "Route Sukuk",
       maps: "View on Google Maps",
       rights: "All rights reserved."
@@ -55,7 +58,7 @@ export default function Footer() {
   const t = text[locale as keyof typeof text] || text.en;
 
   return (
-    <footer className="bg-[#1A1814] text-gray-400 py-12 border-t border-[#B8956A]/20">
+    <footer className="bg-[#1A1814] text-gray-400 pt-12 pb-24 sm:pb-12 border-t border-[#B8956A]/20">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
@@ -95,6 +98,7 @@ export default function Footer() {
               <li><Link href="/products" className="hover:text-[#B8956A] transition-colors">{t.products}</Link></li>
               <li><Link href="/about" className="hover:text-[#B8956A] transition-colors">{t.about}</Link></li>
               <li><Link href="/contact" className="hover:text-[#B8956A] transition-colors">{t.contact_us}</Link></li>
+              <li><a href="https://le01aout.odoo.com/terms" target="_blank" rel="noopener noreferrer" className="hover:text-[#B8956A] transition-colors">{t.terms}</a></li>
             </ul>
           </div>
 

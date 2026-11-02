@@ -32,7 +32,7 @@ npm run build              # Full production build — run before deploying
 
 ## Design System — Current Palette
 
-Warm earthy luxury aesthetic. **Do not revert to old dark navy palette.**
+Warm earthy luxury aesthetic. **Do not revert to old dark navy palette.** `DESIGN.md` in this folder is NOT this design system: it is a black-and-white « Bugatti » reference from the first design pass, used by nothing. `README.md` is the stock create-next-app text (plain `npm run dev`, « Deploy on Vercel »), also wrong here.
 
 | Token | Value | Usage |
 |---|---|---|
@@ -45,7 +45,7 @@ Warm earthy luxury aesthetic. **Do not revert to old dark navy palette.**
 
 Three fonts loaded in `app/[locale]/layout.tsx`:
 - `--font-cairo` — Arabic UI (Cairo)
-- `--font-cormorant` — luxury display serif (Cormorant Garamond weight 300 italic — all headings)
+- `--font-cormorant` — luxury display serif (Cormorant Garamond weight 300 italic — all headings on FR/EN pages)
 - `--font-manrope` — body/UI sans-serif (Latin)
 
 `--font-sans` composes all three in priority order via `@theme {}` in `globals.css`.
@@ -67,7 +67,7 @@ Three fonts loaded in `app/[locale]/layout.tsx`:
 - **IT PLAYS ONCE AND STOPS**, resting on the wide house (~28s). Khaled: "don't repeat the cycle, just stop on the part where we are seeing it from outside." A hero that loops forever competes with the page; one that finishes leaves a still photograph behind it. Tapping the room rail restarts from that room.
 - **The shot list returns to the WHOLE HOUSE between every room** (`house → room → its products → house → next room`). Flying room-to-room directly stopped reading as one home.
 - **NO PROSE IN THE HERO AT ALL** — no product name, no `PR_` code, and no description line for the rooms or the house (Khaled, 2026-09-03: "people can get access to it directly"). What is left is an eyebrow, the room name, the progress dashes and two buttons over a photograph; the portrait scrim was lightened to match, so the picture gets the space back. The `line_ar/fr/en` fields stay in `houseTour.ts` unused, in case the copy is ever wanted back. **The EditorialRows descriptions further down the homepage are deliberately KEPT** — those are the "salon and bedroom" rows he asked to leave alone.
-- **ONE SCREEN, and it plays itself.** `h-[calc(100svh-var(--nav))]`, **not sticky, no scroll track**. The previous version pinned 3.4 viewports of scroll and Khaled's verdict was that nobody should scroll three screens to see a hero, and that the drift looked broken rather than cinematic. Scroll now just leaves the hero. Moves are `MOVE_MS` 600ms with a hard ease-out; holds are ~0.7–1.2s. Pauses when off-screen or the tab is hidden, and honours `prefers-reduced-motion`.
+- **ONE SCREEN, and it plays itself.** `h-[100svh]` (full bleed, see above), **not sticky, no scroll track**. The previous version pinned 3.4 viewports of scroll and Khaled's verdict was that nobody should scroll three screens to see a hero, and that the drift looked broken rather than cinematic. Scroll now just leaves the hero. Moves are `MOVE_MS` 600ms with a hard ease-out; holds are ~0.7–1.2s. Pauses when off-screen or the tab is hidden, and honours `prefers-reduced-motion`.
 - **The house is the connective tissue.** `HOUSE` in `houseTour.ts` is an architectural cutaway holding all five rooms; each room carries a `region`/`regionTall` — its centre inside that render — so flying between rooms is one continuous space instead of a slideshow of unrelated photographs. **Regenerating the house means re-measuring all five regions.**
 - **Every image exists TWICE — 16:9 and 9:16.** ~99% of visitors are on a phone, where object-cover on a landscape render hid whole products (the dining room lost its table, bar cart and ficus). `<picture media="(orientation: portrait)">` picks one and downloads only it; next/image cannot express art direction and would ship both.
 - ⚠️ **`frame()` SCALES ABOUT THE PRODUCT, IT DOES NOT TRANSLATE TO IT — and the obvious implementation is wrong.** `object-cover` **clips** the image to the element, so translating the layer to centre a product does not pan across the photo: it drags the already-cropped picture sideways and exposes the cream background. That shipped once and made the gold bedroom mirror look sliced in half on a phone. The camera therefore sets `transform-origin` to the product's own position (scaling about any origin inside the element always keeps it covering) and permits a pan toward centre only within `T ∈ [(Z-1)(o-1)/Z, (Z-1)o/Z]`, the range that provably keeps both edges outside the frame. **`project()`** converts an image-% to a container-% for whatever object-cover is doing at the measured box — never replace it with a magic factor.
@@ -79,7 +79,7 @@ Three fonts loaded in `app/[locale]/layout.tsx`:
 
 The old video hero (`components/HeroSection.tsx`) and `LuxuryScene.tsx` were deleted on 2026-09-10 — they had zero references.
 
-**AnimatedCategories** — 5 category cards, cream section bg, taupe card gradients. Links to `/products?category={id}`.
+**AnimatedCategories** — 6 category cards (salon, chambre, salle à manger, tables basses, consoles, bureau), cream section bg, taupe card gradients. Links to `/products?category={id}`.
 
 **EditorialRows** — two alternating full-width image+text rows, cream bg. **No watermark** (Khaled, 2026-09-03: the logo on these lifestyle shots looked wrong). Same for the **AnimatedCategories** tiles. `ProductCard`, `ProductGallery` and `ProductVariants` DO keep their marks — real product photos are what the watermark is for. **Both rows now carry real Cloudinary roomsets** — salon = `PR_34/salon_set_grey_leather_roomset.jpg`, chambre = `PR_5/full_bedroom_wardrobe_a.png` (verified 2026-09-05). The old claims that the salon showed a gradient placeholder and that the chambre used `/public/homepage.png` are both **false**; `public/homepage.png` was referenced by nothing and was deleted on 2026-09-10.
 
@@ -106,6 +106,12 @@ const label = locale === "ar" ? "النص" : locale === "fr" ? "Texte" : "Text";
 ```
 
 RTL: phone numbers and other LTR strings inside RTL pages need `dir="ltr" className="inline-block"` to prevent digit reversal.
+
+Every family in `data/categories.json` needs a `categories.<id>` key in all 3 `messages/*.json`, or its product pages print the raw key (`CATEGORIES.TAPIS`, found 2026-11-02). **Arabic pages are Cairo throughout, set once in `app/globals.css`:** it re-points `--font-sans`, `--font-mono`, `--font-serif` and `--font-cormorant` under `html[dir="rtl"]`, and clears letter-spacing and italics. Don't undo it, and don't put Manrope ahead of Cairo in a stack: next/font's Manrope fallback ends in a local Arial, which has Arabic glyphs, so Cairo never got a turn and Arabic showed in Arial, Courier New and Times until 2026-11-03. To check, ask Chrome for the fonts it really used (`CSS.getPlatformFontsForNode`); computed styles only repeat the CSS.
+
+The floating `WhatsAppButton` hides while any `[data-wa-cta]` element is on screen (the hero's button, the product page's button). Tag any new full-size WhatsApp button the same way. The footer's phone bottom padding is what keeps the last line clear of it.
+
+The FAQ's payment, deposit and returns answers repeat the terms in `odoo/conditions_vente.py`, which Khaled approved. Change the two together.
 
 ---
 

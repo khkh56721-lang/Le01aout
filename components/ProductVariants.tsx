@@ -6,6 +6,7 @@ import ProductGallery from "@/components/ProductGallery";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { productWhatsAppMessage, whatsAppUrl } from "@/lib/whatsapp";
 import { thumbImage } from "@/lib/watermark";
+import { MAPS_URL } from "@/lib/location";
 
 export interface VariantOption {
   code: string;
@@ -38,6 +39,18 @@ interface ProductVariantsProps {
 
 const variantsLabel = (locale: string) =>
   locale === "ar" ? "التصميم واللون" : locale === "fr" ? "Design & Couleur" : "Design & Color";
+
+function showroomLine(locale: string) {
+  if (locale === "ar") return "المعرض مفتوح كل يوم من 9 صباحًا إلى 11 ليلًا، طريق صكوك، نواكشوط";
+  if (locale === "fr") return "Showroom ouvert tous les jours de 9h à 23h, Route Sukuk, Nouakchott";
+  return "Showroom open every day, 9 am to 11 pm, Route Sukuk, Nouakchott";
+}
+
+function showroomMapLabel(locale: string) {
+  if (locale === "ar") return "الموقع على الخريطة";
+  if (locale === "fr") return "Voir sur la carte";
+  return "See on the map";
+}
 
 export default function ProductVariants({
   variants,
@@ -158,6 +171,7 @@ export default function ProductVariants({
           )}
 
           <a
+            data-wa-cta
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -168,6 +182,19 @@ export default function ProductVariants({
             </svg>
             {strings.requestWhatsApp}
           </a>
+
+          <p className="mt-3 text-sm text-gray-500 text-center leading-relaxed">
+            {showroomLine(locale)}
+            {" · "}
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#9A7644] font-semibold underline underline-offset-2"
+            >
+              {showroomMapLabel(locale)}
+            </a>
+          </p>
         </div>
       </div>
 
